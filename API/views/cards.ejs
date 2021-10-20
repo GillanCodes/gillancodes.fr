@@ -1,0 +1,119 @@
+<div class="cards">
+
+    <% for(i=0; i<cards.length; i++) { %>
+        <div class="card">
+            <h1 class="title" onclick="redirect()"><%= cards[i].title %></h1>
+            <p class="desc"><%= cards[i].description %></p>
+            <div class="spacer"></div>
+            <div class="requirements">
+                <ul>
+                    <% for (r=0; r<cards[i].requirements.length ; r++ ) { %>
+                        <li><%= cards[i].requirements[r] %></li>
+                    <% } %>
+                </ul>
+            </div>
+            <div class="footer">
+                <p class="price" onclick="redirect()"><%= cards[i].price %> &euro;</p>
+                <p class="sign" onclick="redirect()">@Gillancodes</p>
+            </div>
+        </div>
+
+    <% } %>
+
+</div>
+
+<script defer>
+
+    function redirect () {
+        window.open('https://fr.fiverr.com/gillancodess/')
+    }
+
+</script>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com" defer>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin defer>
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" defer> 
+
+<style>
+
+
+
+
+body{
+    margin:0;
+}
+
+.cards {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    font-family: 'Roboto', sans-serif;
+    
+}
+
+.card {
+    width: 220px;
+    height: 300px;
+    margin: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+
+    position: relative;
+
+    background-color: rgb(230, 230, 230);
+    transition-duration: 10ms;
+}
+
+.card:hover{
+    background-color: rgb(215, 215, 215);
+    transition-duration: 50ms;
+}
+
+.card .spacer {
+    height: 4px;
+    width: 80%;
+    margin: auto;
+    border-radius: 10px;
+    background-color: black;
+}
+
+.card .title {
+    text-align: center;
+    cursor: pointer;
+}
+
+.card .desc {
+    margin-left: 10px;
+}
+
+.card .footer {
+    display: flex;
+    flex-direction: row;
+
+    bottom: 0;
+    position: absolute;
+
+    align-items: baseline;
+}
+
+.card .footer .sign {
+    margin-left: 30px;
+    cursor: pointer;
+}
+
+.card .footer .price {
+    margin-left: 20px;
+    border: solid 1px black;
+    padding: 5px;
+    border-radius: 10px;
+
+    background-color: rgb(89, 101, 123);
+    color: white;
+}
+
+.price:hover {
+    cursor: pointer;
+}
+
+</style>
