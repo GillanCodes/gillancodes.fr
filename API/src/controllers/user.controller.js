@@ -50,3 +50,71 @@ module.exports.getUser = (req, res) => {
         }).select('-password -permissions -email');
     }
 }
+
+module.exports.updateUser = (req, res) => {
+    
+    if (!isValidObjectId(req.params.id)) 
+        return res.status(200).send('invalid id');
+
+    try {
+        
+        if (req.params.id === res.locals.user._id.toString() || res.locals.user.permissions.includes('ADMIN') || res.locals.user.permissions.includes('MOD')) {
+
+            const updatedRecord = {
+                bio: req.body.bio,
+                link: req.body.link
+            }
+
+            userModel.findByIdAndUpdate(
+                req.params.id, {
+                    $set : updatedRecord
+                }, {
+                    new: true
+                },
+                (err, data) => {
+                    if (err) throw Error(error)
+                    else return res.status(202).send(data)
+                }
+            )
+        } else {
+            throw Error('unauthorized action');
+        }
+
+    } catch (error) {
+        return res.status(200).send(error);
+    }
+    
+
+}
+
+
+module.exports.deleteUser = (req, res) => {
+
+    if (!isValidObjectId(req.params.id)) 
+        return res.status(200).send('invalid id');
+
+    if (res.locals.user) {
+
+        if (res.locals.user._id.toString() === req.params.id) {
+            userModel.findByIdAndDelete(req.params.id, (err, data) => {
+                if (err) throw err;
+                else return res.send(data)
+            });
+
+        } else {
+            if (res.locals.user.permissions.includes('ADMIN') || res.locals.user.permissions.includes('MOD')) {
+
+                userModel.findByIdAndDelete(req.params.id, (err, data) => {
+                    if (err) throw err;
+                    else return res.send(data)
+                });
+
+            } else {
+                return res.status(401).send('Unauthorized action')
+            }
+        }
+    } else {
+        return res.status(401).send('Unauthorized action')
+    }
+
+}

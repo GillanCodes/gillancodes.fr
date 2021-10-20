@@ -38,8 +38,8 @@ const userSchema = new mongoose.Schema(
             type:String,
             maxlength: 1024
         },
-        links: {
-            type: [String]
+        link: {
+            type: String
         },
         followers: {
             type: [String],

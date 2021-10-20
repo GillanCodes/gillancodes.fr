@@ -14,6 +14,10 @@ router.get('/logout', authController.logout);
 router.get('/', userController.getAllUsers);
 router.get('/:id', userController.getUser);
 
+router.post('/:id', userController.updateUser);
+
+router.delete('/delete/:id', userController.deleteUser);
+
 
 
 module.exports = router;
