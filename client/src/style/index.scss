@@ -1,0 +1,15 @@
+@import './settings';
+@import './navbar';
+@import './home';
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: $base;
+    color: $text-color1;
+}
+
+.container{
+    width: 70%;
+    margin: auto;
+}
