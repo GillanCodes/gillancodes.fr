@@ -1,5 +1,13 @@
 const { isValidObjectId } = require('mongoose');
 let userModel = require('../../models/user.model');
+const { uploadUserPicErrors } = require('../../utils/error.utils');
+
+let fs = require('fs');
+let {
+    promisify
+} = require('util');
+let pipeline = promisify(require('stream').pipeline);
+
 
 module.exports.getAllUsers = async(req, res) => {
 
@@ -83,8 +91,49 @@ module.exports.updateUser = (req, res) => {
     } catch (error) {
         return res.status(200).send(error);
     }
-    
+}
 
+module.exports.uploadUserPic = (req, res) => {
+    
+    if (res.locals.user) {
+
+        if (res.locals.user._id.toString() === req.body.userId || res.locals.user.permissions.includes('ADMIN') || res.locals.user.permissions.includes('MOD') && res.locals.user.permissions.includes('UPDATE')) {
+
+            try {
+                if (req.file.mimetype !== "image/jpg" && req.file.mimetype !== "image/png" && req.file.mimetype !== "image/jpeg") throw Error('invalid_type');
+                if (req.file.size > 500000) throw Error('max_size'); //Taille en KO
+            } catch (error) {
+                const errors = uploadUserPicErrors(error);
+                return res.status(201).json({errors})
+            }
+
+            const fileName = req.body.username + ".jpg"
+
+            fs.writeFile(`${__dirname}/../../../client/public/uploads/profil/${fileName}`, req.file.buffer, (err) =>{
+                if (err) throw err;
+            });
+        
+            try {
+                userModel.findByIdAndUpdate(
+                    req.body.userId,
+                    {$set: {userpic: "./uploads/profil/" + fileName}},
+                    {new: true, upsert: true, setDefaultsOnInsert: true},
+                    (err, data) => {
+                        if (err) throw Error(err);
+                        else return res.send(data);
+                    }
+                )
+            } catch(error) {
+                res.status(200).send(error);
+            }
+        } else {
+            return res.status(401).send('unauthorized action')
+        }
+
+    } else {
+        return res.status(403).send('forbidden action')
+    }    
+    
 }
 
 
