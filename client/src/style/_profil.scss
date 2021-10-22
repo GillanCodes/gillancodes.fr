@@ -1,3 +1,8 @@
+.succes {
+    text-align: center;
+    margin-bottom: -10px;
+}
+
 .log-container {
 
     width: 60%;
@@ -56,8 +61,12 @@
                     .field {
                         margin-top: 20px;
                         text-align: left;
-                    }
 
+                        .error {
+                            margin-top: 4px;
+                        }
+                    }
+                    
                     label {
                         font-size: 16px;
                         

@@ -24,7 +24,7 @@ const Log = (props) => {
 
                 <ul>
                     <li onClick={modalsHandle} id="register" className={SingUpModal ? "active-btn" : null}>S'inscrire</li>
-                    <li onClick={modalsHandle} id="login" className={SingInModal ? "active-btn" : null}>Se Connecter</li>
+                    <li onClick={modalsHandle} id="login" className={SingInModal ? "active-btn" : null}>Se connecter</li>
                 </ul>
 
                 <div className="form">
