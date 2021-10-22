@@ -11,9 +11,21 @@ let {checkUser, home} = require('./middlewares/auth.middleware');
 let bodyParser = require("body-parser");
 let ejs = require('ejs');
 let cookieParser = require('cookie-parser');
+let cors = require('cors');
 
 let express = require('express');
 let app = express();
+
+const corsOptions = {
+    origin : process.env.CLIENT_URL,
+    'credentials': true,
+    'allowedHeaders': ['sessionId', 'Content-Type'],
+    'exposedHeaders': ['sessionId'],
+    'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    'preflightContinue': false,
+    optionsSuccessStatus: 200,
+  }
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));

@@ -11,5 +11,21 @@ module.exports.uploadUserPicErrors = (err) => {
     }
 
     return errors;
+}
+
+
+module.exports.loginUserErrors = (err) => {
+
+    let errors = {username: "", password: ""};
+
+    if (err.message.includes('incorrect password')){
+        errors.password = "Wrong Password";
+    } 
+
+    if (err.message.includes('incorrect username')){
+        errors.username = "Invalide Username";
+    }
+
+    return errors;
 
 }

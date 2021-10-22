@@ -1,5 +1,6 @@
 let userModel = require('../../models/user.model');
 let jwt = require('jsonwebtoken');
+const { loginUserErrors } = require('../../utils/error.utils');
 
 const maxAge = 3*21*60*60*1000;
 
@@ -28,10 +29,11 @@ module.exports.signin = async(req,res) => {
     try {
         const user = await userModel.login(username, password);
         const token = createToken(user._id);
-        res.cookie('gillancodes_user', token, {httpOnly: true, maxAge});
+        res.cookie('gillancodes_user', token, {httpOnly: true, maxAge, sameSite:"none"});
         res.status(201).json({user:user.username});
     } catch (error) {
-        res.status(200).send(error);
+        const errors = loginUserErrors(error);
+        res.status(200).send({errors});
     }
 
 }

@@ -7,25 +7,28 @@ export default function Navbar() {
             <div className="nav-container">
                 <ul>
                     <NavLink exact to="/" className="header-icon">
-                        <li> <i class="fas fa-home"></i></li>
+                        <li> <i className="fas fa-home"></i></li>
                     </NavLink>
                     <NavLink exact to="/offers" className="item">
-                        <li><i class="fas fa-copy"></i> Offres</li>
+                        <li><i className="fas fa-copy"></i> Offres</li>
                     </NavLink>
                     <NavLink exact to="/about" className="item">
-                        <li><i class="fas fa-address-card"></i> A Propos</li>
+                        <li><i className="fas fa-address-card"></i> A Propos</li>
                     </NavLink>
                     <NavLink exact to="/lorem" className="item">
-                        <li><i class="fas fa-address-card"></i> Lorem</li>
+                        <li><i className="fas fa-address-card"></i> Lorem</li>
                     </NavLink>
                     <NavLink exact to="/lorem" className="item">
-                        <li><i class="fas fa-address-card"></i> Lorem</li>
+                        <li><i className="fas fa-address-card"></i> Lorem</li>
                     </NavLink>
                     <NavLink exact to="/lorem" className="item">
-                        <li><i class="fas fa-address-card"></i> Lorem</li>
+                        <li><i className="fas fa-address-card"></i> Lorem</li>
                     </NavLink>
                     <NavLink exact to="/lorem" className="item">
-                        <li><i class="fas fa-address-card"></i> Lorem</li>
+                        <li><i className="fas fa-address-card"></i> Lorem</li>
+                    </NavLink>
+                    <NavLink exact to="/profil" className="item right">
+                        <li><i class="fas fa-user"></i> Anonyme</li>
                     </NavLink>
                 </ul>
                 <div className="spacer"></div>
