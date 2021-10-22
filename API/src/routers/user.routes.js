@@ -20,6 +20,7 @@ router.get('/:id', userController.getUser);
 router.post('/upload/picture', upload.single('file') ,userController.uploadUserPic);
 
 router.put('/:id', userController.updateUser);
+router.put('/:id/email', userController.updateEmail);
 
 router.delete('/delete/:id', userController.deleteUser);
 

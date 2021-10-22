@@ -3,11 +3,8 @@ let userModel = require('../../models/user.model');
 const { uploadUserPicErrors } = require('../../utils/error.utils');
 
 let fs = require('fs');
-let {
-    promisify
-} = require('util');
-let pipeline = promisify(require('stream').pipeline);
 
+let bcrypt = require('bcrypt');
 
 module.exports.getAllUsers = async(req, res) => {
 
@@ -90,6 +87,55 @@ module.exports.updateUser = (req, res) => {
 
     } catch (error) {
         return res.status(200).send(error);
+    }
+}
+
+module.exports.updateEmail = async (req, res) => {
+
+    const {newEmail ,password} = req.body;
+
+    if (!isValidObjectId(req.params.id)) 
+        return res.status(200).send('invalid id');
+
+    if (!res.locals.user || res.locals.user._id.toString() !== req.params.id){
+        return res.status(403).send('unauthorized action')
+    } else {
+        
+        if (newEmail && password) {
+
+            const user = await userModel.findOne({_id: req.params.id});
+            if (user) {
+                if (user.email !== newEmail) {
+                    const auth = await bcrypt.compare(password, user.password)
+                    if (auth) {
+                        const updatedRecord = {
+                            email: newEmail
+                        }
+                        
+                        userModel.findByIdAndUpdate(
+                            req.params.id, {
+                                $set: updatedRecord
+                            }, {
+                                new:true
+                            },
+                            (err, data) => {
+                                if (err) throw err;
+                                else res.status(201).send(data);
+                            }
+                        )
+                    } else {
+                        res.status(200).send('incorrect pass');
+                    }
+                } else {
+                    res.status(200).send('Same Email');
+                }
+            } else {
+                res.status(200).send('unknown user')
+            }
+
+        } else {
+            res.status(200).send('empty field')
+        }
     }
 }
 

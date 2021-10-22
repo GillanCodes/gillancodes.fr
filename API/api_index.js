@@ -1,10 +1,12 @@
 require('dotenv').config({path: './config/.env'});
 require('./config/db');
 
-let gigsRouter = require('./src/routers/gigs.router');
-let userRouter = require('./src/routers/user.router');
+let gigsRoutes = require('./src/routers/gigs.routes');
+let userRoutes = require('./src/routers/user.routes');
+// let adminRoutes = require('./src/routers/admin.routes')
 
 let {checkUser, home} = require('./middlewares/auth.middleware');
+// let {checkAdmin} = require('./middlewares/permissions.middleware');
 
 let bodyParser = require("body-parser");
 let ejs = require('ejs');
@@ -28,8 +30,10 @@ app.delete('*', checkUser);
 
 app.get('/', home);
 
-app.use('/api/gigs', gigsRouter);
-app.use('/api/user', userRouter);
+app.use('/api/gigs', gigsRoutes);
+app.use('/api/user', userRoutes);
+
+// app.use('/api/admin', adminRoutes);
 
 app.listen(process.env.PORT, () => {
     console.log('Listen on : ' + process.env.PORT);
