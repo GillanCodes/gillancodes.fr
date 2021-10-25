@@ -14,25 +14,30 @@ export default function ProfilPage() {
             <div className="profilHeader">
             <img src={userData.userpic} alt={userData.username} className="profilPicture" />
                 <div className="profil">
+                    <h2 className="username"> {userData.username}</h2>
                     {updateProfil === true && (
                         <>
-                            <input type="text" name="username" id="username" className="usernameInput" value={userData.username} />
-                            <textarea name="bio" id="bio" value={userData.bio}></textarea>
+                            <textarea name="bio" id="bio" className="bioInput" defaultValue={userData.bio}></textarea> <br />
+                            <input type="text" name="link" id="link" defaultValue={userData.link} className="linkInput"/>
                         </>
                     )} 
                     {updateProfil === false && (
                         <>
-                            <h2 className="username"> {userData.username}</h2>
                             <p className="bio">{userData.bio}</p>
+                            <i className="fas fa-link"></i> <a href={userData.link} target='_blank' className="link">{userData.link}</a>
                         </>
                     )}
-                    <i className="fas fa-link"></i> <a href={userData.link} target='_blank' className="link">{userData.link}</a>
-
-                    <p className="button" onClick={() => setUpdateProfil(!updateProfil)}>
-                        Edit
-                    </p>
+                    
                 </div>
+                <p className="button">
+                    <i className="fas fa-edit" title="Modifier le profil" onClick={() => setUpdateProfil(!updateProfil)}></i> <br />
+                    {updateProfil === true && (
+                        <i class="fas fa-save" title="Enregistrer les modifications"></i>
+                    )}
+                </p>
+                
             </div>
+            
             
 
         </div>
