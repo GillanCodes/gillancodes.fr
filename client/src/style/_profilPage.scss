@@ -1,0 +1,53 @@
+.profilContainer {
+    margin-top: 2em;
+    border: 2px solid $light1;
+    border-radius: 20px;
+}
+
+.profilHeader{
+    
+    padding: 25px;
+    display: flex;
+    
+    .profil {
+        margin-left: 20px;
+
+
+        .username {
+            text-transform: uppercase;
+            text-decoration: underline;
+        }
+
+        .usernameInput {
+
+            font-size: 20px;
+            margin-bottom: 20px;
+            margin-top: 20px
+
+        }
+
+        .bio{
+            margin-top: -10px;
+        }
+
+        .link{
+            text-decoration: none;
+            color: $text-color2;
+        }
+    }
+
+}
+
+.follow{
+margin: 0;
+}
+
+
+
+.profilPicture {
+    height: 180px;
+    width: 180px;
+    border-radius: 25px;
+    object-fit: cover;
+    margin-bottom: 30px;
+}

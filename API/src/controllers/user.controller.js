@@ -27,31 +27,31 @@ module.exports.getUser = (req, res) => {
             if (res.locals.user.permissions.includes('ADMIN') || res.locals.user.permissions.includes('MOD') ) {
                 return userModel.findById(req.params.id, (err, user) =>{ //Connected and Admin Or Mod user (own page)
                     if (err) throw err;
-                    else res.status(200).send({user});
+                    else res.status(200).send(user);
                 }).select('-password')
             } else {
                 return userModel.findById(req.params.id, (err, user) =>{ // Just Connected user (own page)
                     if (err) throw err;
-                    else res.status(200).send({user});
+                    else res.status(200).send(user);
                 }).select('-permissions -password');
             }
         } else {
             userModel.findById(req.params.id, (err, user) =>{   // Connected User (not own page)
                 if (err) throw err;
-                else res.status(200).send({user});
+                else res.status(200).send(user);
             }).select('-password -permissions -email');
         }  
          
         if (res.locals.user.permissions.includes('ADMIN') || res.locals.user.permissions.includes('MOD')) {
             return userModel.findById(req.params.id, (err, user) =>{ //Admin or mod user (not own page)
                 if (err) throw err;
-                else res.status(200).send({user});
+                else res.status(200).send(user);
             }).select('-password');
         }
     } else {
         userModel.findById(req.params.id, (err, user) =>{ //Not connected user (not own page)
             if (err) throw err;
-            else res.status(200).send({user});
+            else res.status(200).send(user);
         }).select('-password -permissions -email');
     }
 }

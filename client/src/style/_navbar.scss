@@ -31,7 +31,14 @@
         }
 
         .right {
-            float: right;
+            margin-left: auto;
+            margin-right: 0;
+
+            display: flex;
+        }
+
+        div.is-clickable {
+            cursor: pointer;
         }
 
         .item {

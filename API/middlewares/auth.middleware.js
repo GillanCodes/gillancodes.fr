@@ -23,6 +23,22 @@ module.exports.checkUser = async(req, res, next) => {
 
 }
 
+module.exports.requireAuth = (req, res, next) => {
+    const token = req.cookies.gillancodes_user; // On recup le token
+    if (token) {
+        jwt.verify(token, process.env.TOKEN, async (err, decodedToken) => { // on essaye de le decoder
+            if (err) { //Si on y arrive pas
+                console.log(err);
+            } else { // sinon
+                console.log(decodedToken.id);
+                next();
+            }
+        });
+    } else {
+        console.log("no token")
+    }
+}
+
 module.exports.home = (req, res) => {
     res.status(200).send();
 }

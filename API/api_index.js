@@ -5,7 +5,7 @@ let gigsRoutes = require('./src/routers/gigs.routes');
 let userRoutes = require('./src/routers/user.routes');
 // let adminRoutes = require('./src/routers/admin.routes')
 
-let {checkUser, home} = require('./middlewares/auth.middleware');
+let {checkUser, home, requireAuth} = require('./middlewares/auth.middleware');
 // let {checkAdmin} = require('./middlewares/permissions.middleware');
 
 let bodyParser = require("body-parser");
@@ -33,6 +33,7 @@ app.use(cookieParser());
 
 app.set('view engine', 'ejs');
 
+
 //jwt
 app.get('*', checkUser);
 app.post('*', checkUser);
@@ -41,6 +42,9 @@ app.patch('*', checkUser);
 app.delete('*', checkUser);
 
 app.get('/', home);
+app.get('/jwtid', requireAuth, (req, res) => {
+  res.status(200).send(res.locals.user._id);
+});
 
 app.use('/api/gigs', gigsRoutes);
 app.use('/api/user', userRoutes);
