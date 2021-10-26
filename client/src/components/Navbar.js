@@ -9,8 +9,6 @@ export default function Navbar() {
     const uid = useContext(UidContext);
     const userData = useSelector(state => state.userReducer);
 
-    console.log(userData)
-
     return (
         <nav>
             <div className="nav-container">
@@ -32,6 +30,9 @@ export default function Navbar() {
                     </NavLink>
                     {uid ? (
                         <div className="right">
+                            <NavLink exact to="/dashboard" className="item">
+                                <li><i className="fas fa-user"></i> Dashboard</li>
+                            </NavLink>
                             <NavLink exact to="/profil" className="item">
                                 <li><i className="fas fa-user"></i> {userData.username}</li>
                             </NavLink>

@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const GET_USER = "GET_USER";
+export const UPDATE_USER = "UPDATE_USER";
 
 
 export const getUser = (uid) => {
@@ -14,6 +15,26 @@ export const getUser = (uid) => {
             .catch((err) => {
                 console.log(err);
             })
+    }
+
+}
+
+
+export const userUpdate = (userId, bio, link) => {
+
+    return(dispatch) => {
+        return axios({
+            method: 'put',
+            url: `${process.env.REACT_APP_API_URL}/api/user/${userId}`,
+            withCredentials: true,
+            data: { bio, link}
+        })
+        .then((res)=> {    
+            dispatch({type: UPDATE_USER, payload: res.data});
+        })
+        .catch((err) => {
+            console.log(err);
+        })
     }
 
 }

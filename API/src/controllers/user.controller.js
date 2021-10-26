@@ -33,13 +33,13 @@ module.exports.getUser = (req, res) => {
                 return userModel.findById(req.params.id, (err, user) =>{ // Just Connected user (own page)
                     if (err) throw err;
                     else res.status(200).send(user);
-                }).select('-permissions -password');
+                }).select('-password');
             }
         } else {
             userModel.findById(req.params.id, (err, user) =>{   // Connected User (not own page)
                 if (err) throw err;
                 else res.status(200).send(user);
-            }).select('-password -permissions -email');
+            }).select('-password -email');
         }  
          
         if (res.locals.user.permissions.includes('ADMIN') || res.locals.user.permissions.includes('MOD')) {
@@ -52,7 +52,7 @@ module.exports.getUser = (req, res) => {
         userModel.findById(req.params.id, (err, user) =>{ //Not connected user (not own page)
             if (err) throw err;
             else res.status(200).send(user);
-        }).select('-password -permissions -email');
+        }).select('-password -email');
     }
 }
 

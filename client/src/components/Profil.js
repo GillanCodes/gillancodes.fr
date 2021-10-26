@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import { useSelector } from 'react-redux';
 import { UidContext } from './App.context'
 import Log from './Log'
 import ProfilPage from './Profil/ProfilPage';
