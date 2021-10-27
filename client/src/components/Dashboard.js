@@ -1,46 +1,43 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
+import { isEmpty } from './Utils';
 
 export default function Dashboard() {
     
+    const [isLoading, setIsLoading] = useState(true);
     const [hasPerm, setHasPerm] = useState(false);
-    const [active, setActive] = useState("redirect");
+    const [active, setActive] = useState("default");
 
     const userData = useSelector(state => state.userReducer);
-    var i=0;
+
+    
 
     useEffect(() => {
-        for (i; i<userData.permissions.length; i++){
-            if(userData.permissions[i] === "ADMIN" ){
-                setHasPerm(true);
-            }
+        if(!isEmpty(userData) && isLoading) {
+            setIsLoading(false)
         }
-    }, [userData, hasPerm, i])
+    },[userData])
 
     return (
         <>
-            {!hasPerm ? (
-                <h1>No Perm</h1>
+            {isLoading ? (
+                <h1>Loading</h1>
             ): (
                 <div className="dashboard-container">
                     <div className="menu">
                         <ul>
-                            <li onClick={(e) => setActive('redirect')}>Redirect</li>
-                            <li onClick={(e) => setActive('users')}>Users</li>
-                            <li onClick={(e) => setActive('posts')}>Posts</li>
+                            {userData.permissions.includes("ADMIN") && <li onClick={(e) => setActive('redirect')}>Redirect</li>}
+                            {userData.permissions.includes("AUTHOR") && <li onClick={(e) => setActive('posts')}>Posts</li>}
+                            {userData.permissions.includes("MOD") && userData.permissions.includes("ADMIN") && <li onClick={(e) => setActive('users')}>User</li>}
                         </ul>
                     </div>
 
                     <div className="content">
-                        {active === "redirect" && (
-                            <h1>Redirect</h1>
-                        )}
-                        {active === "users" && (
-                            <h1>Users</h1>
-                        )}
-                        {active === "posts" && (
-                            <h1>Posts</h1>
-                        )}
+                        {userData.permissions.includes("ADMIN") && active === "redirect" && <h1>Redirect</h1>}
+                        {userData.permissions.includes("MOD") && active === "users" && <h1>Users</h1>}
+                        {userData.permissions.includes("AUTHOR") && active === "posts" && <h1>Posts</h1>}
+
+                        {active === "default" && <h1>Default</h1>}
                     </div>
                 </div>
             )}
