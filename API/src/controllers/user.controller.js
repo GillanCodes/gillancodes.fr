@@ -63,11 +63,11 @@ module.exports.updateUser = (req, res) => {
 
     try {
         
-        if (req.params.id === res.locals.user._id.toString() || res.locals.user.permissions.includes('ADMIN') || res.locals.user.permissions.includes('MOD')) {
+        if (req.params.id === res.locals.user._id.toString() || res.locals.user.permissions.admin === true || res.locals.user.permissions.mod === true) {
 
             const updatedRecord = {
                 bio: req.body.bio,
-                link: req.body.link
+                links: req.body.links
             }
 
             userModel.findByIdAndUpdate(
@@ -81,9 +81,9 @@ module.exports.updateUser = (req, res) => {
                     else return res.status(202).send(data)
                 }
             )
-        } else {
+         } else {
             throw Error('unauthorized action');
-        }
+         }
 
     } catch (error) {
         return res.status(200).send(error);

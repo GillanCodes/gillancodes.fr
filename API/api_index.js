@@ -3,6 +3,7 @@ require('./config/db');
 
 let gigsRoutes = require('./src/routers/gigs.routes');
 let userRoutes = require('./src/routers/user.routes');
+let articleRoutes = require('./src/routers/article.routes');
 // let adminRoutes = require('./src/routers/admin.routes')
 
 let {checkUser, home, requireAuth} = require('./middlewares/auth.middleware');
@@ -48,6 +49,7 @@ app.get('/jwtid', requireAuth, (req, res) => {
 
 app.use('/api/gigs', gigsRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/article', articleRoutes);
 
 // app.use('/api/admin', adminRoutes);
 

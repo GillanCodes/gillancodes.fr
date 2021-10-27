@@ -27,8 +27,9 @@ const userSchema = new mongoose.Schema(
             minlength: 8
         },
         permissions: {
-            type: [String],
-            default: ['MEMBER']
+            type: Map,
+            of: Boolean,
+            default: {"member" : true}
         },
         userpic: {
             type:String,
@@ -38,8 +39,9 @@ const userSchema = new mongoose.Schema(
             type:String,
             maxlength: 1024
         },
-        link: {
-            type: String
+        links: {
+            type: Map,
+            of: String,
         },
         followers: {
             type: [String],
