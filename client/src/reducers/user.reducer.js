@@ -10,7 +10,7 @@ export default function userReducer(state = initialState, action) {
             return {
                 ...state,
                 bio: action.payload.bio,
-                link: action.payload.link,
+                links: action.payload.links,
             };
         default:
             return state;

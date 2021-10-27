@@ -5,7 +5,6 @@ import { isEmpty } from './Utils';
 export default function Dashboard() {
     
     const [isLoading, setIsLoading] = useState(true);
-    const [hasPerm, setHasPerm] = useState(false);
     const [active, setActive] = useState("default");
 
     const userData = useSelector(state => state.userReducer);
@@ -16,7 +15,7 @@ export default function Dashboard() {
         if(!isEmpty(userData) && isLoading) {
             setIsLoading(false)
         }
-    },[userData])
+    },[userData, isLoading])
 
     return (
         <>

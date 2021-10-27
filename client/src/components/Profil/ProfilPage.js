@@ -1,14 +1,27 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { userUpdate } from '../../actions/user.action';
 import UserBadges from './UserBadges';
+import { isEmpty } from './../Utils';
 
 export default function ProfilPage() {
 
     const userData = useSelector((state) => state.userReducer);
+    const [isLoading, setIsLoading] = useState(true);
 
-    const [bio, setBio] = useState(userData.bio);
-    const [link, setLink] = useState(userData.link);
+            const [bio, setBio] = useState(userData.bio);
+            const [website, setWebsite] = useState('');
+            const [github, setGithub] = useState('');
+            const [twitter, setTwitter] = useState('');
+
+    useEffect(() => {
+        if(!isEmpty(userData)) {
+            setWebsite(userData.links.website ? userData.links.website : "");
+            setGithub(userData.links.github ? userData.links.github : "");
+            setTwitter(userData.links.twitter ? userData.links.twitter : "");
+            setIsLoading(false);
+        }
+    }, [userData ,setWebsite, setGithub, setTwitter, setIsLoading])
 
     const [updateProfil, setUpdateProfil] = useState(false);
 
@@ -17,8 +30,10 @@ export default function ProfilPage() {
 
     const updateHandle = (event) => {
 
-        if (bio !== userData.bio || link !== userData.link){
-            dispatch(userUpdate(userData._id, bio, link));
+        const updatedLinks = {"website" : website, "github" : github, "twitter": twitter}
+
+        if (bio !== userData.bio || updatedLinks !== userData.links){
+            dispatch(userUpdate(userData._id, bio, updatedLinks));
         }
         setUpdateProfil(false);
     }
@@ -26,38 +41,47 @@ export default function ProfilPage() {
 
 
     return (
-        <div className="profilContainer">
-            
-            <div className="profilHeader">
-            <img src={userData.userpic} alt={userData.username} className="profilPicture" />
-                <div className="profil">
-                    <h2 className="username"> {userData.username} <UserBadges/></h2> 
-                    {updateProfil === true && (
-                        <>
-                            <textarea name="bio" id="bio" className="bioInput" defaultValue={userData.bio} onChange={(e) => setBio(e.target.value)}></textarea> <br />
-                            <input type="text" name="link" id="link" defaultValue={userData.link} onChange={(e) => setLink(e.target.value)} className="linkInput"/>
-                        </>
-                    )} 
 
-                    {updateProfil === false && (
-                        <>
-                            <p className="bio">{userData.bio}</p>
-                            <i className="fas fa-link"></i> <a href={userData.link} target='_blank' rel="noreferrer" className="link">{userData.link}</a>
-                        </>
-                    )}
+        <>
+            {isLoading ? (
+                <h1>Loading</h1>
+            ) : (
+                <div className="profilContainer">
                     
-                </div>
-                <p className="button">
-                    <i className="fas fa-edit" title="Modifier le profil" onClick={() => setUpdateProfil(!updateProfil)}></i> <br />
-                    {updateProfil === true && (
-                        <i class="fas fa-save" title="Enregistrer les modifications" onClick={updateHandle}></i>
-                    )}
-                </p>
-                
-            </div>
-            
-            
+                    <div className="profilHeader">
+                    <img src={userData.userpic} alt={userData.username} className="profilPicture" />
+                        <div className="profil">
+                            <h2 className="username"> {userData.username} <UserBadges/></h2> 
+                            {updateProfil === true && (
+                                <>
+                                    <textarea name="bio" id="bio" className="bioInput" defaultValue={userData.bio} onChange={(e) => setBio(e.target.value)}></textarea> <br />
+                                    <i className="fas fa-link"></i> <input type="text" name="website" id="website" defaultValue={userData.links.website} onChange={(e) => setWebsite(e.target.value)} className="linkInput"/> <br />
+                                    <i className="fab fa-github"></i> <input type="text" name="github" id="github" defaultValue={userData.links.github} onChange={(e) => setGithub(e.target.value)} className="linkInput"/> <br />
+                                    <i className="fab fa-twitter"></i> <input type="text" name="twitter" id="twitter" defaultValue={userData.links.twitter} onChange={(e) => setTwitter(e.target.value)} className="linkInput"/>
+                                </>
+                            )} 
 
-        </div>
+                            {updateProfil === false && (
+                                <>
+                                    <p className="bio">{userData.bio}</p>
+                                    <a href={userData.links.website} target='_blank' rel="noreferrer" className="link"><i className="fas fa-link"></i></a>
+                                    <a href={"https://github.com/" +userData.links.github} target='_blank' rel="noreferrer" className="link"><i className="fab fa-github"></i></a>
+                                    <a href={"https://twitter.com/" + userData.links.twitter} target='_blank' rel="noreferrer" className="link"><i className="fab fa-twitter"></i></a>
+                                </>
+                            )}
+                            
+                        </div>
+                        <p className="button">
+                            <i className="fas fa-edit" title="Modifier le profil" onClick={() => setUpdateProfil(!updateProfil)}></i> <br />
+                            {updateProfil === true && (
+                                <i class="fas fa-save" title="Enregistrer les modifications" onClick={updateHandle}></i>
+                            )}
+                        </p>
+                        
+                    </div>
+                </div>
+            )}
+        </>
+        
     )
 }
