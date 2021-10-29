@@ -10,10 +10,13 @@ import thunk from "redux-thunk";
 //not in BUILD !!!!!!!!!!!!
 import { composeWithDevTools } from 'redux-devtools-extension';
 import logger from 'redux-logger';
+import { getArticles } from './actions/article.action';
 
 const store = createStore(
   rootReducer, composeWithDevTools(applyMiddleware(thunk, logger))
 );
+
+store.dispatch(getArticles());
 
 ReactDOM.render(
     <Provider store={store}>

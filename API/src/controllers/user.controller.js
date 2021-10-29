@@ -63,7 +63,7 @@ module.exports.updateUser = (req, res) => {
 
     try {
         
-        if (req.params.id === res.locals.user._id.toString() || res.locals.user.permissions.admin === true || res.locals.user.permissions.mod === true) {
+        if (req.params.id === res.locals.user._id.toString() || res.locals.user.permissions.get('ADMIN') || res.locals.user.permissions.get('MOD')) {
 
             const updatedRecord = {
                 bio: req.body.bio,
@@ -143,7 +143,7 @@ module.exports.uploadUserPic = (req, res) => {
     
     if (res.locals.user) {
 
-        if (res.locals.user._id.toString() === req.body.userId || res.locals.user.permissions.includes('ADMIN') || res.locals.user.permissions.includes('MOD') && res.locals.user.permissions.includes('UPDATE')) {
+        if (res.locals.user._id.toString() === req.body.userId || res.locals.user.permissions.get('ADMIN') || res.locals.user.permissions.get('MOD') && res.locals.user.permissions.get('UPDATE')) {
 
             try {
                 if (req.file.mimetype !== "image/jpg" && req.file.mimetype !== "image/png" && req.file.mimetype !== "image/jpeg") throw Error('invalid_type');
@@ -197,7 +197,7 @@ module.exports.deleteUser = (req, res) => {
             });
 
         } else {
-            if (res.locals.user.permissions.includes('ADMIN') || res.locals.user.permissions.includes('MOD')) {
+            if (res.locals.user.permissions.get('ADMIN') || res.locals.user.permissions.get('MOD')) {
 
                 userModel.findByIdAndDelete(req.params.id, (err, data) => {
                     if (err) throw err;

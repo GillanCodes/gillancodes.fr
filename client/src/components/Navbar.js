@@ -41,7 +41,7 @@ export default function Navbar() {
                     ): (
                         <div className="right">
                             <NavLink exact to="/profil" className="item">
-                                <li><i class="fas fa-user"></i> Anonyme</li>
+                                <li><i className="fas fa-user"></i> Anonyme</li>
                             </NavLink>
                         </div>
                     )}

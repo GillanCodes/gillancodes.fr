@@ -12,7 +12,6 @@ module.exports.checkUser = async(req, res, next) => {
             } else {
                 let user = await userModel.findById(decodedToken.id);
                 res.locals.user = user;
-                console.log(user);
                 next();
             }
         });
@@ -31,12 +30,9 @@ module.exports.requireAuth = (req, res, next) => {
             if (err) { //Si on y arrive pas
                 console.log(err);
             } else { // sinon
-                console.log(decodedToken.id);
                 next();
             }
         });
-    } else {
-        console.log("no token")
     }
 }
 

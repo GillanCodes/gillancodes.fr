@@ -2,14 +2,21 @@ let mongoose = require('mongoose');
 
 const articleSchema = new mongoose.Schema(
     {
-        "title": {
-            type: STRING,
+        title: {
+            type: String,
             maxlength: 255,
             minlength: 3
         },
-        body {
-            type: 
+        body: {
+            type: String
         },
+        author: {
+            type: String
+        },
+        isEdited: {
+            type: Boolean,
+            default: false
+        }
     }
 )
 
