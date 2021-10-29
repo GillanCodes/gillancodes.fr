@@ -1,5 +1,6 @@
 const { isValidObjectId } = require('mongoose');
 let articleModel = require('../../models/article.models');
+const { articleErrors } = require('../../utils/error.utils');
 
 
 module.exports.getArticles = async(req,res) => {
@@ -21,11 +22,8 @@ module.exports.getArticle = (req,res) => {
 
 }
 
-module.exports.articlePost = async(req, res) => {
+module.exports.articlePost = async (req, res) => {
 
-    if(res.locals.user) {
-
-        if (res.locals.user.permissions.get('AUTHOR')) {
             const newArticle = new articleModel({
                 title: req.body.title,
                 body: req.body.article,
@@ -36,14 +34,9 @@ module.exports.articlePost = async(req, res) => {
                 const article = await newArticle.save();
                 res.status(201).json(article);
             } catch(err) {
-                throw err;
+                let errors = articleErrors(err);
+                res.status(200).send({errors});
             }
-        } else {
-            res.status(403).send('unauthorized action')
-        }
-    } else {
-        res.status(403).send('unauthorized action')
-    }
 
     
 

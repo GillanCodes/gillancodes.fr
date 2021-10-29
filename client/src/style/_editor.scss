@@ -1,0 +1,29 @@
+.editor {
+    width: 60%;
+    margin: auto;
+
+    div.group {
+        display: flex;
+    }
+}
+
+.quill .ql-toolbar {
+    background-color: $light1;
+}
+
+.quill .ql-editor{
+    background-color: $dark2;
+    color: $text-color1;
+    height: 500px;
+}
+
+input.title {
+    font-size: 25px;
+    background-color: $dark2;
+    color: $text-color2;
+    border: 2px solid $light1;
+    border-radius: 10px;
+    margin: 10px;
+    padding:10px;
+    text-align: center;
+}

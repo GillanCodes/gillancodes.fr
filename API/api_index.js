@@ -36,11 +36,7 @@ app.set('view engine', 'ejs');
 
 
 //jwt
-app.get('*', checkUser);
-app.post('*', checkUser);
-app.put('*', checkUser);
-app.patch('*', checkUser);
-app.delete('*', checkUser);
+app.use('*', checkUser);
 
 app.get('/', home);
 app.get('/jwtid', requireAuth, (req, res) => {

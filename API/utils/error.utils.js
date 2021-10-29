@@ -58,3 +58,14 @@ module.exports.registerUserErrors = (err) => {
     return errors;
 
 }
+
+module.exports.articleErrors = (err) => {
+    
+    let errors = {title: ""};
+
+    if (err.message.includes('title') && err.message.includes('shorter')){
+        errors.title = "Le titre fait moins de 3 caractere !";
+    }
+
+    return errors;
+}

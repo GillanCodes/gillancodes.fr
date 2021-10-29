@@ -1,0 +1,82 @@
+.articleContainer {
+    
+    padding-top: 1em;
+
+    width: 40%;
+    margin: auto;
+
+    .article {
+        
+    
+        margin: 10px;
+    
+        border: 2px $dark1 solid;
+        border-radius: 10px;
+    
+        .content{
+            margin: 1em;
+        }
+    
+        h1.title{
+            text-decoration: underline dotted;
+            margin-left: 20px;
+        }
+
+        .body{
+
+            white-space: pre-line;
+
+            h1 {
+                font-size: 30px;
+            }
+
+            h2 {
+                font-size: 25px;
+            }
+
+            h3 {
+                font-size: 20px;
+            }
+
+            h5 {
+                font-size: 15px;
+            }
+
+            h5 {
+                font-size: 10px;
+            }
+
+            a{
+               text-decoration: none;
+                color: $text-color2;
+            }
+
+            p.ql-indent-1 {
+                padding-left: 3em;
+            }
+            p.ql-indent-2 {
+                padding-left: 6em;
+            }
+            p.ql-indent-3 {
+                padding-left: 9em;
+            }
+            p.ql-indent-4 {
+                padding-left: 12em;
+            }
+            p.ql-indent-5 {
+                padding-left: 15em;
+            }
+            p.ql-indent-6 {
+                padding-left: 18em;
+            }
+            p.ql-indent-7 {
+                padding-left: 21em;
+            }
+            p.ql-indent-8 {
+                padding-left: 24em;
+            }
+
+        }
+    }
+}
+

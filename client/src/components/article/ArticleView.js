@@ -17,13 +17,15 @@ export default function ArticleView(props) {
     
     return (
         <div className="article">
-                <div className="head">
-                    <h1>{props.article.title}</h1>
-                </div>
-                <div className="body" dangerouslySetInnerHTML={{__html: sanitize(props.article.body)}}>
-                </div>
-                <div className="footer">
-                    {props.article.author}
+                <div className="content">
+                    <div className="head">
+                        <h1 className="title">{props.article.title}</h1>
+                    </div>
+                    <div className="body" dangerouslySetInnerHTML={{__html: sanitize(props.article.body)}}>
+                    </div>
+                    <div className="footer">
+                        {props.article.author}
+                    </div>
                 </div>
         </div>
     )
