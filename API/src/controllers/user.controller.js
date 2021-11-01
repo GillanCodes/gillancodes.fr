@@ -155,8 +155,10 @@ module.exports.uploadUserPic = (req, res) => {
 
             const fileName = req.body.username + ".jpg"
 
+            console.log(__dirname);
+
             fs.writeFile(`${__dirname}/../../../client/public/uploads/profil/${fileName}`, req.file.buffer, (err) =>{
-                if (err) throw err;
+                 if (err) throw err;
             });
         
             try {

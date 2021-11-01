@@ -16,9 +16,9 @@ export default function ProfilPage() {
 
     useEffect(() => {
         if(!isEmpty(userData)) {
-            setWebsite(userData.links.website ? userData.links.website : "");
-            setGithub(userData.links.github ? userData.links.github : "");
-            setTwitter(userData.links.twitter ? userData.links.twitter : "");
+            setWebsite(userData.links ? userData.links.website : "");
+            setGithub(userData.links ? userData.links.github : "");
+            setTwitter(userData.links ? userData.links.twitter : "");
             setIsLoading(false);
         }
     }, [userData ,setWebsite, setGithub, setTwitter, setIsLoading])
@@ -55,18 +55,18 @@ export default function ProfilPage() {
                             {updateProfil === true && (
                                 <>
                                     <textarea name="bio" id="bio" className="bioInput" defaultValue={userData.bio} onChange={(e) => setBio(e.target.value)}></textarea> <br />
-                                    <i className="fas fa-link"></i> <input type="text" name="website" id="website" defaultValue={userData.links.website} onChange={(e) => setWebsite(e.target.value)} className="linkInput"/> <br />
-                                    <i className="fab fa-github"></i> <input type="text" name="github" id="github" defaultValue={userData.links.github} onChange={(e) => setGithub(e.target.value)} className="linkInput"/> <br />
-                                    <i className="fab fa-twitter"></i> <input type="text" name="twitter" id="twitter" defaultValue={userData.links.twitter} onChange={(e) => setTwitter(e.target.value)} className="linkInput"/>
+                                    <i className="fas fa-link"></i> <input type="text" name="website" id="website" defaultValue={website} onChange={(e) => setWebsite(e.target.value)} className="linkInput"/> <br />
+                                    <i className="fab fa-github"></i> <input type="text" name="github" id="github" defaultValue={github} onChange={(e) => setGithub(e.target.value)} className="linkInput"/> <br />
+                                    <i className="fab fa-twitter"></i> <input type="text" name="twitter" id="twitter" defaultValue={twitter} onChange={(e) => setTwitter(e.target.value)} className="linkInput"/>
                                 </>
                             )} 
 
                             {updateProfil === false && (
                                 <>
                                     <p className="bio">{userData.bio}</p>
-                                    <a href={userData.links.website} target='_blank' rel="noreferrer" className="link"><i className="fas fa-link"></i></a>
-                                    <a href={"https://github.com/" +userData.links.github} target='_blank' rel="noreferrer" className="link"><i className="fab fa-github"></i></a>
-                                    <a href={"https://twitter.com/" + userData.links.twitter} target='_blank' rel="noreferrer" className="link"><i className="fab fa-twitter"></i></a>
+                                    {website && (<a href={website} target='_blank' rel="noreferrer" className="link"><i className="fas fa-link"></i></a>)}
+                                    {github && (<a href={"https://github.com/" + github} target='_blank' rel="noreferrer" className="link"><i className="fab fa-github"></i></a>)}
+                                    {twitter && (<a href={"https://twitter.com/" + twitter} target='_blank' rel="noreferrer" className="link"><i className="fab fa-twitter"></i></a>)}
                                 </>
                             )}
                             
