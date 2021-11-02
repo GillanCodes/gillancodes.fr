@@ -1,7 +1,9 @@
 import React from 'react';
+import LikeArticleButton from './LikeArticleButton';
 
 export default function ArticleView(props) {
     
+    const cut = props.cutter ? props.cutter : "full";
 
     const sanitize = (input) => {
         const doc = new DOMParser().parseFromString(input, 'text/html');
@@ -14,6 +16,10 @@ export default function ArticleView(props) {
         }
         return doc.body.innerHTML;
     };
+
+    const content = sanitize(props.article.body);
+
+    
     
     return (
         <div className="article">
@@ -21,10 +27,21 @@ export default function ArticleView(props) {
                     <div className="head">
                         <h1 className="title">{props.article.title}</h1>
                     </div>
-                    <div className="body" dangerouslySetInnerHTML={{__html: sanitize(props.article.body)}}>
-                    </div>
+                    {cut === "full" ? (
+                      <div className="body" dangerouslySetInnerHTML={{__html: content}}></div>
+                    ): (
+                      <>
+                        <div className="body" dangerouslySetInnerHTML={{__html: content.slice(0, cut) + " ..."}}></div>
+                        <p className="button" onClick={() => window.location = '/article/' + props.article._id}>Lire la suite</p>
+                      </>
+                    )}
                     <div className="footer">
-                        {props.article.author}
+                        Ecrit par <a href="/TODO" className="user-link">{props.article.author}</a>
+                        <div className="menu">
+                          <i class="far fa-comments"></i>
+                          <LikeArticleButton article={props.article} />
+                          <i class="fas fa-share-square"></i>
+                        </div>
                     </div>
                 </div>
         </div>

@@ -53,6 +53,10 @@
             color: $text-color1;
             font-size: 25px;
             margin-left: 10px;
+
+            :hover {
+                color: $text-color2;
+            }
         }
 
         .linkInput {

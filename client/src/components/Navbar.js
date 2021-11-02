@@ -16,15 +16,16 @@ export default function Navbar() {
                     <NavLink exact to="/" className="header-icon">
                         <li> <i className="fas fa-home"></i></li>
                     </NavLink>
+                    <NavLink exact to="/articles" className="item">
+                        <li><i className="far fa-newspaper"></i> Articles</li>
+                    </NavLink>
                     <NavLink exact to="/offers" className="item">
                         <li><i className="fas fa-copy"></i> Offres</li>
                     </NavLink>
                     <NavLink exact to="/about" className="item">
                         <li><i className="fas fa-address-card"></i> A Propos</li>
                     </NavLink>
-                    <NavLink exact to="/lorem" className="item">
-                        <li><i className="fas fa-address-card"></i> Lorem</li>
-                    </NavLink>
+                    
                     <NavLink exact to="/lorem" className="item">
                         <li><i className="fas fa-address-card"></i> Lorem</li>
                     </NavLink>

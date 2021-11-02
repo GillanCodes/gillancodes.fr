@@ -1,6 +1,7 @@
 import React from 'react'
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import Article from '../Article'
+import ArticleThread from '../ArticleThread'
 import Dashboard from '../Dashboard'
 import Home from '../Home'
 import Navbar from '../Navbar'
@@ -14,6 +15,7 @@ export default function index() {
             <Switch>
                 <Route path="/" exact component={Home} />
                 <Route path="/Profil" exact component={Profil} />
+                <Route path="/articles/" exact component={ArticleThread} />
                 <Route path="/article/:id" exact component={Article} />
 
                 <Route path="/dashboard" exact component={Dashboard} />

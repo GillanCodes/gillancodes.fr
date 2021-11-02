@@ -5,6 +5,7 @@
 @import './profilPage';
 @import './article';
 @import './editor';
+@import './articleThread';
 
 
 body {
@@ -17,6 +18,18 @@ body {
 .container{
     width: 70%;
     margin: auto;
+}
+
+a {
+    text-decoration: underline;
+    color: $text-color2;
+    cursor: pointer;
+}
+
+.link {
+    text-decoration: underline;
+    color: $text-color2;
+    cursor: pointer;
 }
 
 .error {
