@@ -3,6 +3,7 @@ const { articleErrors } = require('../../utils/error.utils');
 
 let articleModel = require('../../models/article.models');
 let commentModel = require('../../models/comment.model');
+const userModel = require('../../models/user.model');
 
 module.exports.getArticles = async(req,res) => {
 
@@ -41,16 +42,76 @@ module.exports.articlePost = async (req, res) => {
 
 }
 
-// TODO
-
 module.exports.likeArticle = (req, res) => {
     if (!isValidObjectId(req.params.id)) 
         return res.status(200).send('invalid id');
+
+        const {userId} = req.body;
+
+        try {
+            articleModel.findByIdAndUpdate(
+                req.params.id,
+                {
+                    $addToSet: {likers: userId},
+                },
+                {new: true},
+                (err, data) => {
+                    if (err) console.log(err);
+                    else {
+                        userModel.findByIdAndUpdate(
+                            userId,
+                            {
+                                $addToSet: {likes: req.params.id},
+                            },
+                            {new: true},
+                            (err, data) => {
+                                if (err) console.log(err);
+                                else res.status(202).send(data);
+                            }
+                        );
+                    }
+                }
+            );
+    
+        } catch (error) {
+            console.log(error);
+        }
 }
 
 module.exports.dislikeArticle = (req, res) => {
     if (!isValidObjectId(req.params.id)) 
         return res.status(200).send('invalid id');
+
+        const {userId} = req.body;
+
+        try {
+            articleModel.findByIdAndUpdate(
+                req.params.id,
+                {
+                    $pull: {likers: userId},
+                },
+                {new: true},
+                (err, data) => {
+                    if (err) console.log(err);
+                    else {
+                        userModel.findByIdAndUpdate(
+                            userId,
+                            {
+                                $pull: {likes: req.params.id},
+                            },
+                            {new: true},
+                            (err, data) => {
+                                if (err) console.log(err);
+                                else res.status(202).send(data);
+                            }
+                        );
+                    }
+                }
+            );
+    
+        } catch (error) {
+            console.log(error);
+        }
 }
 
 
@@ -101,14 +162,74 @@ module.exports.editComment = (req, res) => {
 
 }
 
-    //TODO
-
 module.exports.likeComment = (req, res) => {
     if (!isValidObjectId(req.params.id)) 
         return res.status(200).send('invalid id');
+
+    const {userId} = req.body;
+
+    try {
+        commentModel.findByIdAndUpdate(
+            req.params.id,
+            {
+                $addToSet: {likers: userId},
+            },
+            {new: true},
+            (err, data) => {
+                if (err) console.log(err);
+                else {
+                    userModel.findByIdAndUpdate(
+                        userId,
+                        {
+                            $addToSet: {likes: req.params.id},
+                        },
+                        {new: true},
+                        (err, data) => {
+                            if (err) console.log(err);
+                            else res.status(202).send(data);
+                        }
+                    );
+                }
+            }
+        );
+
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 module.exports.dislikeComment = (req, res) => {
     if (!isValidObjectId(req.params.id)) 
         return res.status(200).send('invalid id');
+
+        const {userId} = req.body;
+
+    try {
+        commentModel.findByIdAndUpdate(
+            req.params.id,
+            {
+                $pull: {likers: userId},
+            },
+            {new: true},
+            (err, data) => {
+                if (err) console.log(err);
+                else {
+                    userModel.findByIdAndUpdate(
+                        userId,
+                        {
+                            $pull: {likes: req.params.id},
+                        },
+                        {new: true},
+                        (err, data) => {
+                            if (err) console.log(err);
+                            else res.status(202).send(data);
+                        }
+                    );
+                }
+            }
+        );
+
+    } catch (error) {
+        console.log(error);
+    }
 }

@@ -1,4 +1,4 @@
-const { articlePost, getArticles, getArticle, postComment, editComment, getComments, likeComment, dislikeComment } = require('../controllers/article.controller');
+const { articlePost, getArticles, getArticle, postComment, editComment, getComments, likeComment, dislikeComment, likeArticle, dislikeArticle } = require('../controllers/article.controller');
 
 let router = require('express').Router();
 
@@ -7,8 +7,8 @@ router.get('/:id', getArticle);
 
 router.post('/post', articlePost);
 
-router.patch('/like/:id', );
-router.patch('/dislike/:id', )
+router.patch('/like/:id', likeArticle);
+router.patch('/dislike/:id', dislikeArticle);
 
 router.get('/:id/comments', getComments);
 router.post('/post/comment/', postComment);

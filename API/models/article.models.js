@@ -13,7 +13,7 @@ const articleSchema = new mongoose.Schema(
         author: {
             type: String
         },
-        likes: {
+        likers: {
             type: [String],
             default: []
         },
