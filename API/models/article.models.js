@@ -13,6 +13,10 @@ const articleSchema = new mongoose.Schema(
         author: {
             type: String
         },
+        likes: {
+            type: [String],
+            default: []
+        },
         isEdited: {
             type: Boolean,
             default: false

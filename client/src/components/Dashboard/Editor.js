@@ -39,13 +39,15 @@ export default function Editor() {
         await axios
             .post(`${process.env.REACT_APP_API_URL}/api/article/post`, data)
             .then((res) => {
-                if (res.data.errors.title) 
+                console.log(res.data);
+                if (res.data.errors) 
                     return error.innerHTML = res.data.errors.title;
                 setLink(res.data._id);
                 setIsPost(true);
                 
             }).catch((err) => {
-                error.innerHTML = "Une erreur est survenue ! Si vous pensez que cela est un bug merci de contacter un administrateur"
+                error.innerHTML = "Une erreur est survenue ! Si vous pensez que cela est un bug merci de contacter un administrateur";
+                console.log(err);
             })
     }
 
