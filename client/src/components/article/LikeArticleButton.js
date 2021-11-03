@@ -3,44 +3,42 @@ import { useDispatch } from 'react-redux';
 import { dislikeArticle, likeArticle } from '../../actions/article.action'
 import { UidContext } from '../App.context';
 
-export default function LikeArticleButton(props) {
+export default function LikeArticleButton({ article }) {
     
     const [liked, setLiked] = useState(false);
-
-    const uid = useContext(UidContext);
+    const uid = useContext(UidContext)
+    
     const dispatch = useDispatch();
 
-    const likeHandle = () => {
-        dispatch(likeArticle(props.article._id, uid))
+    const like = () => {
+        dispatch(likeArticle(article._id, uid))
         setLiked(true);
-        console.log(liked + " | Like")
     }
-  
-    const dislikeHandle = () => {
-        dispatch(dislikeArticle(props.article._id, uid))
+
+    const unlike = () => {
+        dispatch(dislikeArticle(article._id, uid))
         setLiked(false);
-        console.log(liked + " | Dislike")
     }
 
     useEffect(() => {
-        if(props.article.likers.includes(uid)){
+        if (article.likers.includes(uid)) {
             setLiked(true);
-            console.log(liked + " | Like UseEffetc")
         } else {
-            setLiked(false);
-            console.log(liked + " | Dislike UseEffect")
+            setLiked(false)
         }
-        return
-    }, [uid, props.article, liked]);
+    }, [uid, article.likers, liked]);
     
     return (
         <>
-            {liked === true && (
-                <i className="fas fa-heart" onClick={dislikeHandle}></i> 
+            {uid === null && (
+                <div>Connectez-vous pour aimer un post !</div>
+            )}
+            {uid && liked === false && (
+                <i className="far fa-heart" onClick={like}></i>
             )}
 
-            {liked === false && (
-                <i className="far fa-heart" onClick={likeHandle}></i>   
+            {uid && liked === true && (
+                <i className="fas fa-heart liked" onClick={unlike}></i> 
             )}
         </>
     )

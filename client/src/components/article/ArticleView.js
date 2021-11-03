@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { isEmpty } from '../Utils';
 import LikeArticleButton from './LikeArticleButton';
 
 export default function ArticleView(props) {
     
+  const [isLoading, setIsLoading] = useState(true);
+
     const cut = props.cutter ? props.cutter : "full";
 
     const sanitize = (input) => {
@@ -19,11 +22,16 @@ export default function ArticleView(props) {
 
     const content = sanitize(props.article.body);
 
-    
+    useEffect(() => {
+      if (!isEmpty(props)){
+        setIsLoading(false);
+      }
+    }, [props, isLoading]);
     
     return (
         <div className="article">
-                <div className="content">
+                {!isLoading && (
+                  <div className="content">
                     <div className="head">
                         <h1 className="title">{props.article.title}</h1>
                     </div>
@@ -44,6 +52,11 @@ export default function ArticleView(props) {
                         </div>
                     </div>
                 </div>
+                )}
+
+                {isLoading && (
+                  <h1>Load !</h1>
+                )}
         </div>
     )
 }

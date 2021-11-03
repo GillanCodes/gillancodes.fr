@@ -49,6 +49,7 @@ module.exports.likeArticle = (req, res) => {
         const {userId} = req.body;
 
         try {
+           
             articleModel.findByIdAndUpdate(
                 req.params.id,
                 {
@@ -56,20 +57,19 @@ module.exports.likeArticle = (req, res) => {
                 },
                 {new: true},
                 (err, data) => {
-                    if (err) console.log(err);
-                    else {
-                        userModel.findByIdAndUpdate(
-                            userId,
-                            {
-                                $addToSet: {likes: req.params.id},
-                            },
-                            {new: true},
-                            (err, data) => {
-                                if (err) console.log(err);
-                                else res.status(202).send(data);
-                            }
-                        );
-                    }
+                    if (err) return console.log(err);                    
+                }
+            );
+            
+            userModel.findByIdAndUpdate(
+                userId,
+                {
+                    $addToSet: {likes: req.params.id},
+                },
+                {new: true},
+                (err, data) => {
+                    if (err) return console.log(err);
+                    else return res.send(data);
                 }
             );
     
@@ -117,10 +117,7 @@ module.exports.dislikeArticle = (req, res) => {
 
 
 module.exports.getComments = async (req, res) => {
-    if (!isValidObjectId(req.params.id)) 
-        return res.status(200).send('invalid id');
-
-    await commentModel.find({articleId: req.params.id}, (err, data) => {
+    await commentModel.find((err, data) => {
         if (err) res.status(200).send(err);
         else res.status(201).json(data);
     })

@@ -1,21 +1,21 @@
-const { articlePost, getArticles, getArticle, postComment, editComment, getComments, likeComment, dislikeComment, likeArticle, dislikeArticle } = require('../controllers/article.controller');
+const articleRoutes = require('../controllers/article.controller');
 
 let router = require('express').Router();
 
-router.get('/', getArticles);
-router.get('/:id', getArticle);
+router.get('/', articleRoutes.getArticles);
+router.get('/:id', articleRoutes.getArticle);
 
-router.post('/post', articlePost);
+router.post('/post', articleRoutes.articlePost);
 
-router.patch('/like/:id', likeArticle);
-router.patch('/dislike/:id', dislikeArticle);
+router.patch('/like/:id', articleRoutes.likeArticle);
+router.patch('/dislike/:id', articleRoutes.dislikeArticle);
 
-router.get('/:id/comments', getComments);
-router.post('/post/comment/', postComment);
-router.put('/edit/comment/:id', editComment);
+router.get('/comments', articleRoutes.getComments);
+router.post('/post/comment/', articleRoutes.postComment);
+router.put('/edit/comment/:id', articleRoutes.editComment);
 
-router.patch('/like/comment/:id', likeComment);
-router.patch('/dislike/comment/:id', dislikeComment);
+router.patch('/like/comment/:id', articleRoutes.likeComment);
+router.patch('/dislike/comment/:id', articleRoutes.dislikeComment);
 
 
 module.exports = router;
