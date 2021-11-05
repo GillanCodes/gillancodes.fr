@@ -17,6 +17,17 @@ const articleSchema = new mongoose.Schema(
             type: [String],
             default: []
         },
+        comments: {
+            type: [
+                {
+                    commenterId: String,
+                    commenterPic: String,
+                    commenterUsername: String,
+                    text: String,
+                    timestamp: Number
+                }
+            ]
+        },
         isEdited: {
             type: Boolean,
             default: false

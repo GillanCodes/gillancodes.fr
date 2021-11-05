@@ -125,17 +125,36 @@ module.exports.getComments = async (req, res) => {
 
 module.exports.postComment = async(req, res) => {
 
-    const {posterId, articleId, comment} = req.body;
-
-    const newComment = new commentModel({
-        articleId,
-        posterId,
-        comment
-    });
-
+    const {text} = req.body;
+    
     try {
-        const comment = await newComment.save();
-        res.status(200).send(comment);
+        
+        if(res.locals.user) {
+            articleModel.findByIdAndUpdate(
+                req.params.id, {
+                    $push: {
+                        comments: {
+                            commenterId: res.locals.user._id,
+                            commenterUsername: res.locals.user.username,
+                            commenterPic : res.locals.user.userpic,
+                            text,
+                            timestamp: new Date().getTime()
+                        }
+                    }
+                }, {
+                    new: true
+                },
+                (err, data) => {
+                    if (err) console.log(err)
+                    else res.status(200).send(data);
+                }
+            )
+        } else {
+            return res.status(401).send('unauthorized action')
+        }
+    
+        return 
+
     } catch (error) {
         console.log(error);
     }
@@ -146,15 +165,30 @@ module.exports.editComment = (req, res) => {
     if (!isValidObjectId(req.params.id)) 
         return res.status(200).send('invalid id');
 
-        commentModel.findByIdAndUpdate(req.params.id, 
-            {
-                $set:  { comment: req.body.comment }
-            }, {
-                new: true,
-            }, (err, data) => {
-                if (err) console.log(err);
-                else return res.status(202).json(data);
-            });
+    const {commentId, commenterId, text} = req.body
+
+    try {
+        
+        return articleModel.findById(
+            req.params.id,
+            (err, data) => {
+                const thecomment = data.comments.find((comment) => {
+                    return comment._id.equals(commentId);
+                });
+
+                if (!thecomment) return res.status(404).send('comment not found');
+                thecomment.text = text;
+
+                return data.save((err) => {
+                    if (err) res.status(500).send(err);
+                    else res.status(200).send(data);
+                })
+            }
+        )
+
+    } catch (error) {
+        
+    }
 
 
 }
