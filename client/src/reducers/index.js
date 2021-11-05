@@ -5,4 +5,4 @@ import articleReducer from "./article.reducer";
 export default combineReducers({
     userReducer,
     articleReducer,
-})
+});

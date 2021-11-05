@@ -1,4 +1,4 @@
-import { DISLIKE_ARTICLE, GET_ARTICLES, GET_COMMENTS, LIKE_ARTICLE } from "../actions/article.action";
+import { DISLIKE_ARTICLE, GET_ARTICLES, LIKE_ARTICLE } from "../actions/article.action";
 
 const initialState = {};
 
