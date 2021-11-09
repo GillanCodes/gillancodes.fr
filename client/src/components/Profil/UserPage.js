@@ -8,19 +8,20 @@ export default function UserPage({ username }) {
     const [isLoading, setIsLoading] = useState(true);
 
     const usersData = useSelector(state => state.usersReducer);
+    const userData = useSelector(state => state.userReducer);
 
     useEffect(() => {
-        if (!isEmpty(usersData)){
+        if (!isEmpty(usersData) && !isEmpty(userData)){
             setIsLoading(false);
         }
-    }, [usersData])
+    }, [usersData, userData])
 
     return (
         <>
             {!isLoading && (
                 <div>
                     {usersData.map((user) => {
-                        if (user.username.toLowerCase() === username.toLowerCase()) {
+                        if (user.username === username) {
                             return (
                                 <div className="profilContainer">
                                 <div className="profilHeader">

@@ -7,14 +7,13 @@ export default function ArticleThread() {
 
     const [isLoading, setIsLoading] = useState(true)
 
-    const userData = useSelector(state => state.userReducer);
     const articlesData = useSelector(state => state.articleReducer);
 
     useEffect(() => {
-        if (!isEmpty(userData) && !isEmpty(articlesData)){
+        if (!isEmpty(articlesData)){
             setIsLoading(false);
         }
-    }, [userData, articlesData])
+    }, [articlesData])
 
     return (
         <div className="container">

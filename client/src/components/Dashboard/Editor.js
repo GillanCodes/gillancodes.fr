@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useSelector } from 'react-redux';
+import UserInfo from '../Profil/UserInfo';
 
 export default function Editor() {
 
@@ -72,7 +73,7 @@ export default function Editor() {
             <input type="text" name="title" id="title" className="title" placeholder="Titre de l'article" onChange={(e) => setTitle(e.target.value)}/> <p className="button" onClick={handlePost}>Send</p>
             </div>
             <ReactQuill onChange={handleChange} modules={modules} theme={'snow'}></ReactQuill>
-            
+            <p>Ecrit par : <UserInfo username={userData.username} withBadges userPic="big" /></p>
         </div>
     )
 }

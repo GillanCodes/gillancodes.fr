@@ -6,6 +6,7 @@ import ReactToolTip from 'react-tooltip';
 export default function UserInfo(props) {
     
     const usersData = useSelector((state) => state.usersReducer);
+    const userData = useSelector((state) => state.userReducer);
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -20,7 +21,7 @@ export default function UserInfo(props) {
          {!isLoading ? (
              <>
                 {usersData.map(user => {
-                    if (user.username.toLowerCase() === props.username.toLowerCase()) {
+                    if (user.username === props.username) {
                         return (
                             <div className="userInfo">
                                 {props.userPic === "big" && (
@@ -34,7 +35,13 @@ export default function UserInfo(props) {
                                 )}
                 
                                 {props.linked ? (
-                                    <a href={"/profil/" + user.username} className="username">{user.username}</a>
+                                    <>
+                                        {userData && userData.username === user.username ? (
+                                            <a href="/profil/" className="username">{user.username}</a>
+                                        ) : (
+                                            <a href={"/profil/" + user.username} className="username">{user.username}</a>
+                                        )}
+                                    </>
                                 ): (
                                     <p className="username">{user.username}</p>
                                 )}
@@ -56,9 +63,9 @@ export default function UserInfo(props) {
                                                     {user.permissions.DEV === true && (
                                                         <i class="fab fa-dev" data-tip="Dev"></i>
                                                     )}
-                                                    <ReactToolTip place="top"/>
                                                 </> 
                                             )}
+                                            <ReactToolTip place="top"/>
                                     </div>
                             </div>
                         )

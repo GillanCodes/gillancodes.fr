@@ -1,0 +1,51 @@
+.dashboard-container {
+    
+    width: 50%;
+    margin: auto;
+
+    .default {
+        .userInfo {
+            float: right;
+        }
+    }
+    
+    .dash-welcom{
+        .title {
+            text-align: center;
+            align-items: center;
+        }
+    }
+}
+
+.userlist-container {
+
+    .title{
+        text-align: center;
+    }
+
+    .userlist {
+
+        ul{
+            list-style: none;
+
+            li{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin: 15px 0px;
+                border: 1px $dark1 solid;
+                border-radius: 10px;
+                padding: 10px;
+            }
+        }
+    }
+
+}
+
+.usereditor-container {
+
+    width: 60%;
+    margin: auto;
+    text-align: center;
+}
+

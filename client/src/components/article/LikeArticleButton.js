@@ -30,9 +30,6 @@ export default function LikeArticleButton({ article }) {
     
     return (
         <>
-            {uid === null && (
-                <div>Connectez-vous pour aimer un post !</div>
-            )}
             {uid && liked === false && (
                 <i className="far fa-heart" onClick={like}></i>
             )}

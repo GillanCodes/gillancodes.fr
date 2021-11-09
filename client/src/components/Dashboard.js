@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { UidContext } from './App.context';
 import Editor from './Dashboard/Editor';
+import UsersList from './Dashboard/UsersList';
+import UserInfo from './Profil/UserInfo';
 import { isEmpty } from './Utils';
 
 export default function Dashboard() {
@@ -36,16 +38,24 @@ export default function Dashboard() {
                                 <ul>
                                     {userData.permissions.ADMIN === true && <li onClick={(e) => setActive('redirect')}>Redirect</li>}
                                     {userData.permissions.AUTHOR === true && <li onClick={(e) => setActive('posts')}>Posts</li>}
-                                    {userData.permissions.MOD === true && userData.permissions.includes("ADMIN") && <li onClick={(e) => setActive('users')}>User</li>}
+                                    {userData.permissions.MOD === true && userData.permissions.ADMIN === true && <li onClick={(e) => setActive('users')}>User</li>}
                                 </ul>
                             </div>
 
                             <div className="content">
                                 {userData.permissions.ADMIN === true && active === "redirect" && <h1>Redirect</h1>}
-                                {userData.permissions.MOD === true && active === "users" && <h1>Users</h1>}
+                                {userData.permissions.MOD === true && active === "users" && <UsersList />}
                                 {userData.permissions.AUTHOR === true && active === "posts" && <Editor />}
 
-                                {active === "default" && <h1>Default</h1>}
+                                {active === "default" && (
+                                    <div className='default'>
+                                        <UserInfo username={userData.username} linked withBadges userPic="big" />
+                                        <div className="dash-welcom">
+                                            <h1 className='title'>Bienvenue sur le dashboard</h1>
+                                            
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     )}

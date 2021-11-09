@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import UserInfo from '../Profil/UserInfo';
 import { isEmpty } from '../Utils';
 import Comment from './Comment';
 import LikeArticleButton from './LikeArticleButton';
@@ -46,7 +47,7 @@ export default function ArticleView(props) {
 											</>
 										)}
 										<div className="footer">
-											Ecrit par <a href="/TODO" className="user-link">{props.article.author}</a>
+											Ecrit par : <UserInfo username={props.article.author} linked withBadges/>
 											<div className="menu">
 											{isOpen === false && (
 												<i className="far fa-comments" onClick={(e)=> setIsOpen(!isOpen)}></i>
