@@ -15,6 +15,10 @@ body {
     color: $text-color1;
 }
 
+textarea {
+    font-family: 'Roboto', sans-serif;
+}
+
 .container{
     width: 70%;
     margin: auto;
@@ -38,4 +42,43 @@ a {
 
 .sucess {
     color: rgb(160, 238, 141)
+}
+
+.userInfo {
+
+    display: flex;
+    align-items: center;
+
+    .icon-big{
+        height: 70px;
+        width: 70px;
+        object-fit: cover;
+        border-radius: 20px;
+    }
+
+    .icon-med{
+        height: 50px;
+        width: 50px;
+        object-fit: cover;
+        border-radius: 20px;
+    }
+
+    .icon-small{
+        height: 40px;
+        width: 40px;
+        object-fit: cover;
+        border-radius: 20px;
+    }
+
+    .username{
+        margin-left: 5px;
+        text-transform: capitalize;
+    }
+
+    .badges {
+
+        i {
+            padding-left: 5px;
+        }
+    }
 }

@@ -109,6 +109,48 @@
 
 .comment-container{
 
+    .spacer {
+        background-color: $dark2;
+        width: 60%;
+        height: 2px;
+        border-radius: 20px;
+        margin: 20px auto 20px auto;
+    }
+
+    .form {
+        // border: solid $dark1 1px;
+        // border-radius: 10px;
+        // padding: 5px;
+        // margin-top: 10px;
+        text-align: center;
+
+        textarea{
+            width: 90%;
+            height: 70px;
+            resize: none;
+            border: none;
+            background-color: $dark2;
+            color: $white;
+            font-weight: 500;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 15px;
+
+        }
+
+        .submit-btn {
+
+            padding: 10px;
+            background-color: $light2;
+            border: none;
+            border-radius: 7px;
+            font-weight: 700;
+            font-family: 'Roboto', sans-serif;
+            margin-top: 10px;
+            
+        }
+    }
+
     .comment {
 
         border: solid $dark1 1px;

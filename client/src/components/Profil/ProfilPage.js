@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { userUpdate } from '../../actions/user.action';
-import UserBadges from './UserBadges';
+import UserInfo from './UserInfo';
 import { isEmpty } from './../Utils';
 
 export default function ProfilPage() {
@@ -51,7 +51,7 @@ export default function ProfilPage() {
                     <div className="profilHeader">
                     <img src={userData.userpic} alt={userData.username} className="profilPicture" />
                         <div className="profil">
-                            <h2 className="username"> {userData.username} <UserBadges/></h2> 
+                            <h2 className="username"> {userData.username} <UserInfo/></h2> 
                             {updateProfil === true && (
                                 <>
                                     <textarea name="bio" id="bio" className="bioInput" defaultValue={userData.bio} onChange={(e) => setBio(e.target.value)}></textarea> <br />

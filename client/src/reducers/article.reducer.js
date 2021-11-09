@@ -1,4 +1,4 @@
-import { DISLIKE_ARTICLE, GET_ARTICLES, LIKE_ARTICLE } from "../actions/article.action";
+import { ADD_COMMENT, DISLIKE_ARTICLE, GET_ARTICLES, LIKE_ARTICLE } from "../actions/article.action";
 
 const initialState = {};
 
@@ -26,6 +26,8 @@ export default function articleReducer(state = initialState, action){
                 }
                 return article
             });
+        case ADD_COMMENT:
+            
         default:
             return state;
     }

@@ -1,4 +1,5 @@
 const articleRoutes = require('../controllers/article.controller');
+let {checkUser} = require('../../middlewares/auth.middleware');
 
 let router = require('express').Router();
 

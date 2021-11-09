@@ -119,6 +119,8 @@ module.exports.postComment = async(req, res) => {
     
     try {
         
+        console.log(req)
+
         if(res.locals.user) {
             articleModel.findByIdAndUpdate(
                 req.params.id, {
