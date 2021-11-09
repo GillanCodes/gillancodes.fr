@@ -1,8 +1,9 @@
 import React from 'react'
+import { timestampParser } from '../Utils'
 
 export default function Comment({ article }) {
     
-    
+     
 
     return (
         <div className="comment-container">
@@ -11,14 +12,14 @@ export default function Comment({ article }) {
                 return (
                     <div className="comment">
                         <div className="comment-head">
-                            <img src={comment.commenterPic} alt={comment.commenterUsername} />
+                            <img className="user-icon" src={comment.commenterPic} alt={comment.commenterUsername} />
                             <p>{comment.commenterUsername}</p>
                         </div>
                         <div className="comment-body">
                             <p>{comment.text}</p>
                         </div>
                         <div className="comment-footer">
-                            {comment.timestamp}
+                            <p className="date">{timestampParser(comment.timestamp)}</p>
                         </div>
                     </div>
                 )

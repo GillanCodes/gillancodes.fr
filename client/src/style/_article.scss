@@ -107,3 +107,43 @@
     }
 }
 
+.comment-container{
+
+    .comment {
+
+        border: solid $dark1 1px;
+        border-radius: 10px;
+        padding: 5px;
+        margin-top: 10px;
+
+        .comment-head {
+
+            display: flex;
+            align-items: center;
+
+            p {
+                margin-left: 5px;
+            }
+
+            .user-icon {
+                height: 40px;
+                width: 40px;
+                object-fit: cover;
+                border-radius: 20px;
+            }
+        }
+
+        .comment-footer {
+
+
+            .date{
+                font-size: 10px;
+                margin-left: 10px;
+                font-style: italic;
+            }
+        }
+
+    }
+
+}
+

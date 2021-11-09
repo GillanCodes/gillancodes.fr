@@ -2,7 +2,6 @@ const { isValidObjectId } = require('mongoose');
 const { articleErrors } = require('../../utils/error.utils');
 
 let articleModel = require('../../models/article.models');
-let commentModel = require('../../models/comment.model');
 const userModel = require('../../models/user.model');
 
 module.exports.getArticles = async(req,res) => {
@@ -112,15 +111,6 @@ module.exports.dislikeArticle = (req, res) => {
         } catch (error) {
             console.log(error);
         }
-}
-
-
-
-module.exports.getComments = async (req, res) => {
-    await commentModel.find((err, data) => {
-        if (err) res.status(200).send(err);
-        else res.status(201).json(data);
-    })
 }
 
 module.exports.postComment = async(req, res) => {

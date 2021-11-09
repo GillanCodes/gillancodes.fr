@@ -59,7 +59,9 @@ export default function ArticleView(props) {
 											<i class="fas fa-share-square"></i>
 										</div>
 									</div>
-									<Comment article={props.article} />
+									{isOpen && (
+										<Comment article={props.article} />
+									)}
 								</div>
 								)}
 
