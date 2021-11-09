@@ -51,7 +51,7 @@ export default function ProfilPage() {
                     <div className="profilHeader">
                     <img src={userData.userpic} alt={userData.username} className="profilPicture" />
                         <div className="profil">
-                            <h2 className="username"> {userData.username} <UserInfo/></h2> 
+                            <UserInfo withBadges username={userData.username} />
                             {updateProfil === true && (
                                 <>
                                     <textarea name="bio" id="bio" className="bioInput" defaultValue={userData.bio} onChange={(e) => setBio(e.target.value)}></textarea> <br />

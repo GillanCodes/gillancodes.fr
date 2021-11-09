@@ -8,7 +8,7 @@ let bcrypt = require('bcrypt');
 
 module.exports.getAllUsers = async(req, res) => {
 
-    const users = await userModel.find().select('-password -email -permissions -_id');
+    const users = await userModel.find().select('-password -email -_id');
     res.status(200).json(users);
 
 }

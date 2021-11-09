@@ -14,7 +14,8 @@ export default function index() {
         <Navbar />
             <Switch>
                 <Route path="/" exact component={Home} />
-                <Route path="/Profil" exact component={Profil} />
+                <Route path="/profil" exact component={Profil} />
+                <Route path="/profil/:username" exact component={Profil} />
                 <Route path="/articles/" exact component={ArticleThread} />
                 <Route path="/article/:id" exact component={Article} />
 

@@ -3,6 +3,7 @@ import { UidContext } from '../App.context';
 import { useDispatch } from 'react-redux';
 import { isEmpty, timestampParser } from '../Utils'
 import { addComment, getArticles } from '../../actions/article.action';
+import UserInfo from '../Profil/UserInfo';
 
 export default function Comment({ article }) {
     
@@ -45,8 +46,7 @@ export default function Comment({ article }) {
                     
                     <div className="comment">
                         <div className="comment-head">
-                            <img className="user-icon" src={comment.commenterPic} alt={comment.commenterUsername} />
-                            <p>{comment.commenterUsername}</p>
+                            <UserInfo username={comment.commenterUsername} withBadges userPic="small" linked/>
                         </div>
                         <div className="comment-body">
                             <p>{comment.text}</p>

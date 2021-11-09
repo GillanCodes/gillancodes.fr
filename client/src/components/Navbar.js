@@ -35,7 +35,7 @@ export default function Navbar() {
                                 <li><i className="fas fa-user"></i> Dashboard</li>
                             </NavLink>
                             <NavLink exact to="/profil" className="item">
-                                <li><i className="fas fa-user"></i> {userData.username}</li>
+                                <li><i className="fas fa-user"></i> {userData.username} {userData.certified && (<i class="far fa-check-circle"></i>)}</li>
                             </NavLink>
                             <Logout />
                         </div>

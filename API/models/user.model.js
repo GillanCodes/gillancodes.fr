@@ -26,6 +26,10 @@ const userSchema = new mongoose.Schema(
             maxlength: 1024,
             minlength: 8
         },
+        certified : {
+            type: Boolean,
+            default: false
+        },
         permissions: {
             type: Map,
             of: Boolean,
