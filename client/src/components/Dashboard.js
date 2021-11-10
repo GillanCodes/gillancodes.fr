@@ -43,6 +43,7 @@ export default function Dashboard() {
                             </div>
 
                             <div className="content">
+
                                 {userData.permissions.ADMIN === true && active === "redirect" && <h1>Redirect</h1>}
                                 {userData.permissions.MOD === true && active === "users" && <UsersList />}
                                 {userData.permissions.AUTHOR === true && active === "posts" && <Editor />}

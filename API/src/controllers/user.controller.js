@@ -8,7 +8,7 @@ let bcrypt = require('bcrypt');
 
 module.exports.getAllUsers = async(req, res) => {
 
-    const users = await userModel.find().select('-password -email -_id');
+    const users = await userModel.find().select('-password -email');
     res.status(200).json(users);
 
 }
@@ -139,11 +139,53 @@ module.exports.updateEmail = async (req, res) => {
     }
 }
 
+
+module.exports.updatePermissions = (req, res) => {
+
+    if (!isValidObjectId(req.params.id)) 
+        return res.status(200).send('invalid id');
+
+    const {ADMIN, MOD, AUTHOR, DEV, certified} = req.body;
+
+    if (res.locals.user) {
+
+        if (res.locals.user.permissions.get('ADMIN')) {
+
+            const updatedRecord = {
+                permissions: {
+                    ADMIN,
+                    MOD,
+                    AUTHOR,
+                    DEV
+                },
+                certified
+            };
+
+            userModel.findByIdAndUpdate(req.params.id,{
+                $set: updatedRecord
+            }, {
+                new: true, 
+            }, 
+            (err, data) => {
+                if (err) throw err;
+                else res.status(201).send(data);
+            })
+
+        } else {
+            return res.status(403).send('unauthorized action : not admin')
+        }
+
+    } else {
+        return res.status(403).send('unauthorized action: not logged')
+    }
+
+}
+
 module.exports.uploadUserPic = (req, res) => {
     
     if (res.locals.user) {
 
-        if (res.locals.user._id.toString() === req.body.userId || res.locals.user.permissions.get('ADMIN') || res.locals.user.permissions.get('MOD') && res.locals.user.permissions.get('UPDATE')) {
+        if (res.locals.user._id.toString() === req.body.userId) { //TODO : Change perms
 
             try {
                 if (req.file.mimetype !== "image/jpg" && req.file.mimetype !== "image/png" && req.file.mimetype !== "image/jpeg") throw Error('invalid_type');

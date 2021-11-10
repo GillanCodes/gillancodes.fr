@@ -21,6 +21,7 @@ router.post('/upload/picture', upload.single('file') ,userController.uploadUserP
 
 router.put('/:id', userController.updateUser);
 router.put('/:id/email', userController.updateEmail);
+router.put('/:id/permissions', userController.updatePermissions);
 
 router.delete('/delete/:id', userController.deleteUser);
 

@@ -23,7 +23,7 @@ export default function UserInfo(props) {
                 {usersData.map(user => {
                     if (user.username === props.username) {
                         return (
-                            <div className="userInfo">
+                            <div className="userInfo" key={user.username}>
                                 {props.userPic === "big" && (
                                     <img src={user.userpic} alt={user.userName} className="icon-big"/>
                                 )}
@@ -47,21 +47,21 @@ export default function UserInfo(props) {
                                 )}
                                         <div className='badges'>
                                             {user.certified === true && (
-                                                <i class="far fa-check-circle" data-tip="Certified User"></i>
+                                                <i className="far fa-check-circle" data-tip="Certified User"></i>
                                             )}
                                             {props.withBadges && (
                                                 <>
                                                     {user.permissions.ADMIN === true && (
-                                                        <i class="fas fa-tools" data-tip="Admin"></i>
+                                                        <i className="fas fa-tools" data-tip="Admin"></i>
                                                     )}
                                                     {user.permissions.MOD === true && (
-                                                        <i class="fas fa-user-shield" data-tip="Mod"></i>
+                                                        <i className="fas fa-user-shield" data-tip="Mod"></i>
                                                     )}
                                                     {user.permissions.AUTHOR === true && (
-                                                        <i class="fas fa-pencil-alt" data-tip="Author"></i>
+                                                        <i className="fas fa-pencil-alt" data-tip="Author"></i>
                                                     )}
                                                     {user.permissions.DEV === true && (
-                                                        <i class="fab fa-dev" data-tip="Dev"></i>
+                                                        <i className="fab fa-dev" data-tip="Dev"></i>
                                                     )}
                                                 </> 
                                             )}

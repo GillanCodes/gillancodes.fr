@@ -57,7 +57,7 @@ export default function ArticleView(props) {
 												<i className="fas fa-comments" onClick={(e)=> setIsOpen(!isOpen)}></i>
 											)}
 											<LikeArticleButton article={props.article} />
-											<i class="fas fa-share-square"></i>
+											<i className="fas fa-share-square"></i>
 										</div>
 									</div>
 									{isOpen && (

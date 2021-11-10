@@ -33,8 +33,12 @@ export default function UserPage({ username }) {
                                         {user.links && user.links.github && (<a href={"https://github.com/" + user.links.github} target='_blank' rel="noreferrer" className="link"><i className="fab fa-github"></i></a>)}
                                         {user.links && user.links.twitter && (<a href={"https://twitter.com/" + user.links.twitter} target='_blank' rel="noreferrer" className="link"><i className="fab fa-twitter"></i></a>)}
                                         </div>
-                                    </div>
+                                        <p className="button">
+                                            <a href={"/dashboard/user/" + user.username}><i className="fas fa-edit" data-tip={"Modifier le profil de " + user.username}></i></a>
+                                        </p>
+                                    </div> 
                                 </div>
+                                
                             )
                         }
                         return null

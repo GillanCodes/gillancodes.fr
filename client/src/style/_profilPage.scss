@@ -17,6 +17,23 @@
         margin-top: 0px;
         margin-bottom: 0;
     }
+
+    .picture {
+        display: inline;
+        
+        .uploadPic{
+            form {
+                .file{
+                    
+                    input {
+                        border: 1px $dark1 solid;
+                    }
+                }
+            }
+        }
+    }
+
+    
     
     .profil {
         margin-left: 20px;

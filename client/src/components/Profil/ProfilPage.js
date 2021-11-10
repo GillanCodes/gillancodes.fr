@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { userUpdate } from '../../actions/user.action';
 import UserInfo from './UserInfo';
 import { isEmpty } from './../Utils';
+import UplaodUserPic from './UplaodUserPic';
 
 export default function ProfilPage() {
 
@@ -49,7 +50,12 @@ export default function ProfilPage() {
                 <div className="profilContainer">
                     
                     <div className="profilHeader">
-                    <img src={userData.userpic} alt={userData.username} className="profilPicture" />
+                    <div className='picture'>
+                        <img src={userData.userpic} alt={userData.username} className="profilPicture" />
+                        {updateProfil === true && (
+                            <UplaodUserPic />
+                        )}
+                    </div>
                         <div className="profil">
                             <UserInfo withBadges username={userData.username} />
                             {updateProfil === true && (
@@ -74,7 +80,7 @@ export default function ProfilPage() {
                         <p className="button">
                             <i className="fas fa-edit" title="Modifier le profil" onClick={() => setUpdateProfil(!updateProfil)}></i> <br />
                             {updateProfil === true && (
-                                <i class="fas fa-save" title="Enregistrer les modifications" onClick={updateHandle}></i>
+                                <i className="fas fa-save" title="Enregistrer les modifications" onClick={updateHandle}></i>
                             )}
                         </p>
                         
