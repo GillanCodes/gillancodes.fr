@@ -8,9 +8,9 @@ import { getUsers } from '../../actions/users.action';
 export default function UserUpdator({ user }) {
 
     const [bio, setBio] = useState(user.bio);
-    const [website, setWebsite] = useState(user.links.website);
-    const [github, setGithub] = useState(user.links.github);
-    const [twitter, setTwitter] = useState(user.links.twitter);
+    const [website, setWebsite] = useState(user.links ? user.links.website : "");
+    const [github, setGithub] = useState(user.links ? user.links.github : "");
+    const [twitter, setTwitter] = useState(user.links ? user.links.twitter : "");
 
     const [isAdmin, setIsAdmin] = useState(user.permissions.ADMIN)
     const [isMod, setIsMod] = useState(user.permissions.MOD)
@@ -51,9 +51,9 @@ export default function UserUpdator({ user }) {
 
             <div className='profil'>
                 <textarea name="bio" id="bio" className="bioInput" defaultValue={user.bio} onChange={(e) => setBio(e.target.value)}></textarea> <br />
-                <i className="fas fa-link"></i> <input type="text" name="website" id="website" defaultValue={user.links.website} onChange={(e) => setWebsite(e.target.value)} className="linkInput"/> <br />
-                <i className="fab fa-github"></i> <input type="text" name="github" id="github" defaultValue={user.links.github} onChange={(e) => setGithub(e.target.value)} className="linkInput"/> <br />
-                <i className="fab fa-twitter"></i> <input type="text" name="twitter" id="twitter" defaultValue={user.links.twitter} onChange={(e) => setTwitter(e.target.value)} className="linkInput"/>
+                <i className="fas fa-link"></i> <input type="text" name="website" id="website" defaultValue={website} onChange={(e) => setWebsite(e.target.value)} className="linkInput"/> <br />
+                <i className="fab fa-github"></i> <input type="text" name="github" id="github" defaultValue={github} onChange={(e) => setGithub(e.target.value)} className="linkInput"/> <br />
+                <i className="fab fa-twitter"></i> <input type="text" name="twitter" id="twitter" defaultValue={twitter} onChange={(e) => setTwitter(e.target.value)} className="linkInput"/>
                 <p className="btn" onClick={updateUser}>Save Profil</p>
             </div>
             
