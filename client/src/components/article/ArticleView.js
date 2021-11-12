@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import UserInfo from '../Profil/UserInfo';
 import { isEmpty } from '../Utils';
 import Comment from './Comment';
@@ -8,6 +9,9 @@ export default function ArticleView(props) {
 		
 	const [isLoading, setIsLoading] = useState(true);
 	const [isOpen, setIsOpen] = useState(false);
+	const [isAuthor, setisAuthor] = useState(false);
+
+	const userData = useSelector(state => state.userReducer);
 
 		const cut = props.cutter ? props.cutter : "full";
 
@@ -27,6 +31,11 @@ export default function ArticleView(props) {
 
 		useEffect(() => {
 			if (!isEmpty(props)){
+				// if (!isEmpty(userData)) {
+				// 	if (userData.permissions.AUTHOR ||userData.permissions.ADMIN) {
+				// 		setisAuthor(true);
+				// 	}
+				// }
 				setIsLoading(false);
 			}
 		}, [props, isLoading]);
@@ -35,6 +44,11 @@ export default function ArticleView(props) {
 				<div className="article">
 								{!isLoading && (
 									<div className="content">
+										{/* {isAuthor && (
+											<p className="button">
+												<i className="fas fa-edit" title="Modifier le profil" onClick={() => window.location = `/dashboard/article/${props.article._id}` }></i> <br />
+											</p>
+										)} */}
 										<div className="head">
 												<h1 className="title">{props.article.title}</h1>
 										</div>

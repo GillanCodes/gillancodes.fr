@@ -5,9 +5,14 @@ let articleModel = require('../../models/article.models');
 const userModel = require('../../models/user.model');
 
 module.exports.getArticles = async(req,res) => {
-
-    const articles = await articleModel.find();
-    res.status(200).json(articles);
+    
+    if (res.locals.user && res.locals.user.permissions.has('AUTHOR') || res.locals.user && res.locals.user.permissions.has('ADMIN')) {
+        const articles = await articleModel.find();
+        res.status(200).json(articles);
+    } else {
+        const articles = await articleModel.find({isPublish: true});
+        res.status(200).json(articles);
+    }
 
 }
 
@@ -16,10 +21,17 @@ module.exports.getArticle = (req,res) => {
     if (!isValidObjectId(req.params.id)) 
         return res.status(200).send('invalid id');
 
-    articleModel.findById(req.params.id, (err, data) => {
-        if (err) throw err
-        else return res.status(200).json(data);
-    });
+    if (res.locals.user && res.locals.user.permissions.AUTHOR || res.locals.user && res.locals.user.permissions.ADMIN) {
+        articleModel.findById(req.params.id, (err, data) => {
+            if (err) throw err
+            else return res.status(200).json(data);
+        });
+    } else {
+        articleModel.findOne({_id : req.params.id, isPublish: true}, (err, data) => {
+            if (err) throw err
+            else return res.status(200).json(data);
+        });
+    }
 
 }
 

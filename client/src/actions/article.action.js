@@ -8,9 +8,11 @@ export const ADD_COMMENT = "ADD_COMMENT";
 export const getArticles = () => {
 
     return(dispatch) => {
-        return axios
-            .get(`${process.env.REACT_APP_API_URL}/api/article/`)
-            .then((res) => {
+        return axios({
+            method: 'get',
+            withCredentials: true,
+            url: `${process.env.REACT_APP_API_URL}/api/article/`
+        }).then((res) => {
                 dispatch({type: GET_ARTICLES, payload: res.data})
             })  
             .catch((err) => {

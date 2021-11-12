@@ -11,7 +11,7 @@ export default function UserPage({ username }) {
     const userData = useSelector(state => state.userReducer);
 
     useEffect(() => {
-        if (!isEmpty(usersData) && !isEmpty(userData)){
+        if (!isEmpty(usersData)){
             setIsLoading(false);
         }
     }, [usersData, userData])

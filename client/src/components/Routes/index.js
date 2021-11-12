@@ -3,6 +3,7 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import Article from '../Article'
 import ArticleThread from '../ArticleThread'
 import Dashboard from '../Dashboard'
+import ArticleDashboard from '../Dashboard/ArticleDashboard'
 import UserEditor from '../Dashboard/UserEditor'
 import Home from '../Home'
 import Navbar from '../Navbar'
@@ -22,6 +23,7 @@ export default function index() {
 
                 <Route path="/dashboard" exact component={Dashboard} />
                 <Route path="/dashboard/user/:username" exact component={UserEditor} />
+                <Route path="/dashboard/article/:id" exact component={ArticleDashboard} />
             </Switch>
         </BrowserRouter>
     )

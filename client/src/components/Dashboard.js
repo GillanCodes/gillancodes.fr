@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { UidContext } from './App.context';
-import Editor from './Dashboard/Editor';
+import ArticleDashboard from './Dashboard/ArticleDashboard';
 import UsersList from './Dashboard/UsersList';
 import UserInfo from './Profil/UserInfo';
 import { isEmpty } from './Utils';
@@ -46,7 +46,7 @@ export default function Dashboard() {
 
                                 {userData.permissions.ADMIN === true && active === "redirect" && <h1>Redirect</h1>}
                                 {userData.permissions.MOD === true && active === "users" && <UsersList />}
-                                {userData.permissions.AUTHOR === true && active === "posts" && <Editor />}
+                                {userData.permissions.AUTHOR === true && active === "posts" && <ArticleDashboard />}
 
                                 {active === "default" && (
                                     <div className='default'>
