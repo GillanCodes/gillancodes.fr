@@ -52,7 +52,7 @@ module.exports.articleEdit = (req, res) => {
                     title : req.body.title,
                     body : req.body.article,
                     isEdited: true,
-                    isPublish: req.body.publish
+                    isPublish: req.body.isPublish
                 }
             }, (err, data) => {
                 if (!err) res.status(201).send(data)
