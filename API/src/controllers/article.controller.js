@@ -55,7 +55,7 @@ module.exports.articleEdit = (req, res) => {
                     isPublish: req.body.publish
                 }
             }, (err, data) => {
-                if (!err) res.status(201).send(res)
+                if (!err) res.status(201).send(data)
                 else console.log(err);
             })
     } catch (error) {
