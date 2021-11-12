@@ -41,6 +41,58 @@ module.exports.articlePost = async (req, res) => {
 
 }
 
+module.exports.articleEdit = (req, res) => {
+    if (!isValidObjectId(req.params.id)) 
+        return res.status(200).send('invalid id');
+
+    try {
+        articleModel.findByIdAndUpdate(
+            req.params.id, {
+                $set: {
+                    title : req.body.title,
+                    body : req.body.article,
+                    isEdited: true,
+                    isPublish: req.body.publish
+                }
+            }, (err, data) => {
+                if (!err) res.status(201).send(res)
+                else console.log(err);
+            })
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+module.exports.articleDelete = async (req, res) => {
+    if (!isValidObjectId(req.params.id)) 
+        return res.status(200).send('invalid id');
+
+    try {
+        
+        const article = await articleModel.findOne({_id: req.params.id});
+
+        if (article.isDelete) {
+
+            articleModel.findByIdAndRemove(req.params.id, (err, data) => {
+                if (err) console.log(err)
+                else res.status(200).send(data);
+            });
+
+        } else {
+            articleModel.findByIdAndUpdate(req.params.id, {
+                $set: {isDelete: true}
+            }, (err, data) => {
+                if (err) console.log(err)
+                else res.status(201).send(data);   
+            })
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+
 module.exports.likeArticle = (req, res) => {
     if (!isValidObjectId(req.params.id)) 
         return res.status(200).send('invalid id');

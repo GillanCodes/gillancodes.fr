@@ -28,9 +28,17 @@ const articleSchema = new mongoose.Schema(
                 }
             ]
         },
+        isPublish: {
+            type: Boolean,
+            default: false
+        },
         isEdited: {
             type: Boolean,
             default: false
+        },
+        isDelete: {
+            type: Boolean,
+            default:false
         }
     }
 )
