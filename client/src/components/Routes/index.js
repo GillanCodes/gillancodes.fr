@@ -8,6 +8,7 @@ import UserEditor from '../Dashboard/UserEditor'
 import Home from '../Home'
 import Navbar from '../Navbar'
 import Profil from '../Profil'
+import UserSettings from '../Profil/UserSettings'
 
 export default function index() {
 
@@ -17,6 +18,7 @@ export default function index() {
             <Switch>
                 <Route path="/" exact component={Home} />
                 <Route path="/profil" exact component={Profil} />
+                <Route path="/profil/settings" exact component={UserSettings} />
                 <Route path="/profil/:username" exact component={Profil} />
                 <Route path="/articles/" exact component={ArticleThread} />
                 <Route path="/article/:id" exact component={Article} />

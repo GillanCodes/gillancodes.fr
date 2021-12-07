@@ -77,7 +77,7 @@ export default function ProfilPage() {
                             )}
                             
                         </div>
-                        <p className="button">
+                        <p className="custom-button">
                             <i className="fas fa-edit" title="Modifier le profil" onClick={() => setUpdateProfil(!updateProfil)}></i> <br />
                             {updateProfil === true && (
                                 <i className="fas fa-save" title="Enregistrer les modifications" onClick={updateHandle}></i>

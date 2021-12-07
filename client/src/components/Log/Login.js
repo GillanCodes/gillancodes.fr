@@ -38,22 +38,29 @@ export default function Login() {
 
 
     return (
-        <div className="form-content">
+
+        <div>
             <form action="" method="post" onSubmit={handleLogin}>
 
-                <div className="field">
-                    <label htmlFor="username">Nom d'utilisateur</label> <br />
-                    <input type="text" name="username" id="username" autoComplete="off" onChange={(event) => setUsername(event.target.value)} value={username} /> <br />
-                    <p className="username error"></p>
+            <div className="field">
+                <label htmlFor="password" className="label">Username</label>
+                <div className="control">
+                    <input type="text" name="username" id="username" className='input' onChange={(event) => setUsername(event.target.value)} value={username}/>
                 </div>
-                <div className="field">
-                    <label htmlFor="password">Mot de Passe</label> <br />
-                    <input type="password" name="password" id="password" autoComplete="off" onChange={(event) => setPassword(event.target.value)}  value={password}/><br />
-                    <p className="password error"></p>
+            </div>
+
+            <div className="field">
+                <label htmlFor="password" className="label">Password</label>
+                <div className="control">
+                    <input type="password" name="password" id="password" className='input' onChange={(event) => setPassword(event.target.value)}  value={password}/>
                 </div>
-                <br />
-                <input type="submit" value="Se connecter" className="button" />
-                
+            </div>
+
+            <div class="field">
+                <p class="control">
+                    <input type="submit" value="Se Connecter" className='button is-info' />
+                </p>
+            </div>
 
             </form>
         </div>

@@ -19,13 +19,22 @@ const Log = (props) => {
     }
     
     return (
-        <div className="connection-form">
+        <div className="log-form">
             <div className="form-container">
+                <div class="tabs is-centered is-toggle">
+                    <ul>
+                        {/* eslint-disable-next-line */}
+                        <li className={SingUpModal ? "is-active" : null}><a onClick={modalsHandle} id="register">S'inscrire</a></li>
+                        {/* eslint-disable-next-line */}
+                        <li className={SingInModal ? "is-active" : null}><a onClick={modalsHandle} id="login">Se connecter</a></li>
+                    </ul>
+                </div>
 
-                <ul>
-                    <li onClick={modalsHandle} id="register" className={SingUpModal ? "active-btn" : null}>S'inscrire</li>
-                    <li onClick={modalsHandle} id="login" className={SingInModal ? "active-btn" : null}>Se connecter</li>
-                </ul>
+                {/* <div class="tabs is-centered is-boxed">
+                    <ul>
+                        
+                    </ul>
+                </div> */}
 
                 <div className="form">
                     {SingInModal && <Login />}
@@ -34,6 +43,7 @@ const Log = (props) => {
 
             </div>
         </div>
+
     )
 }
 

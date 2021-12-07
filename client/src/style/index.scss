@@ -1,49 +1,58 @@
 @import './settings';
 @import './navbar';
-@import './home';
+// @import './home';
 @import 'profil';
 @import './profilPage';
-@import './article';
+// @import './article';
 @import './editor';
-@import './articleThread';
-@import './dashboard';
+// @import './articleThread';
+// @import './dashboard';
 
+@import "../../node_modules/bulma/bulma.sass";
 
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
     background-color: $base;
     color: $text-color1;
+    height: 100vh;
 }
 
-textarea {
-    font-family: 'Roboto', sans-serif;
-}
-
-.container{
-    width: 70%;
+.log-form {
+    padding-top: 4em;
+    width: 20%;
     margin: auto;
 }
 
-a {
-    text-decoration: underline;
-    color: $text-color2;
-    cursor: pointer;
-}
 
-.link {
-    text-decoration: underline;
-    color: $text-color2;
-    cursor: pointer;
-}
+// textarea {
+//     font-family: 'Roboto', sans-serif;
+// }
 
-.error {
-    color: $text-error;
-}
+// .container{
+//     width: 70%;
+//     margin: auto;
+// }
 
-.sucess {
-    color: rgb(160, 238, 141)
-}
+// a {
+//     text-decoration: underline;
+//     color: $text-color2;
+//     cursor: pointer;
+// }
+
+// .link {
+//     text-decoration: underline;
+//     color: $text-color2;
+//     cursor: pointer;
+// }
+
+// .error {
+//     color: $text-error;
+// }
+
+// .sucess {
+//     color: rgb(160, 238, 141)
+// }
 
 .userInfo {
 

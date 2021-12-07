@@ -9,8 +9,10 @@ export default function ArticleView(props) {
 		
 	const [isLoading, setIsLoading] = useState(true);
 	const [isOpen, setIsOpen] = useState(false);
-	const [isAuthor, setisAuthor] = useState(false);
+	// eslint-disable-next-line
+	const [isAuthor, setisAuthor] = useState(false); 
 
+	// eslint-disable-next-line
 	const userData = useSelector(state => state.userReducer);
 
 		const cut = props.cutter ? props.cutter : "full";

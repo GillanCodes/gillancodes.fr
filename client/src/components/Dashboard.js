@@ -34,11 +34,13 @@ export default function Dashboard() {
                         <h1>Not logged !</h1>
                     ):(
                         <div className="dashboard-container">
-                            <div className="menu">
+
+                            <div className="tabs is-toggle is-centered">
                                 <ul>
-                                    {userData.permissions.ADMIN === true && <li onClick={(e) => setActive('redirect')}>Redirect</li>}
-                                    {userData.permissions.AUTHOR === true && <li onClick={(e) => setActive('posts')}>Posts</li>}
-                                    {userData.permissions.MOD === true && userData.permissions.ADMIN === true && <li onClick={(e) => setActive('users')}>User</li>}
+                                    <li className={active === "default" ? "is-active": ""}><a onClick={(e) => setActive('default')}>Dashboard</a></li>
+                                    {userData.permissions.ADMIN === true && <li className={active === "redirect" ? "is-active": ""}><a onClick={(e) => setActive('redirect')}>Redirect</a></li>}
+                                    {userData.permissions.AUTHOR === true && <li className={active === "posts" ? "is-active": ""}><a onClick={(e) => setActive('posts')}>Posts</a></li>}
+                                    {userData.permissions.MOD === true && userData.permissions.ADMIN === true && <li className={active === "users" ? "is-active": ""}><a onClick={(e) => setActive('users')}>Users</a></li>}
                                 </ul>
                             </div>
 
