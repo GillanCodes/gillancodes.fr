@@ -20,15 +20,36 @@ export default function UsersList() {
             <h1 className='title'>Users List</h1>
 
             {!isLoading ? (
-                <div className='userlist'>
-
-                    <ul>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         {usersData.map((user) => {
-                            return <li key={user._id}><UserInfo linked userPic="med" withBadges username={user.username} /> <a href={"/dashboard/user/" + user.username}>Edit</a></li>
+                            return (
+                                <tr key={user.id}>
+                                    <th><UserInfo linked userPic="med" withBadges username={user.username} /></th>
+                                    <th><a href={"/dashboard/user/" + user.username}>Edit</a></th>
+                                </tr>
+                            )
                         })}
-                    </ul>
+                        
+                    </tbody>
 
-                </div>
+                    
+                </table>
+
+
+                // <div className='userlist'>
+
+                //     <ul>
+                //         
+                //     </ul>
+
+                // </div>
             ): (
                 <h1>Loading</h1>
             )}

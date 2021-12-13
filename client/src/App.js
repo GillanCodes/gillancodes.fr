@@ -13,7 +13,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetchToken= async() => {
+    const fetchToken = async() => {
       await axios({
         method:'get',
         url:`${process.env.REACT_APP_API_URL}/jwtid`,
@@ -21,7 +21,7 @@ function App() {
       }).then((res) => {
         setUid(res.data);
       }).catch((err) => {
-        console.log(err);
+        throw Error(err)
       })
     }
     fetchToken();

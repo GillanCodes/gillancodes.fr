@@ -19,30 +19,28 @@ const Log = (props) => {
     }
     
     return (
-        <div className="log-form">
-            <div className="form-container">
-                <div class="tabs is-centered is-toggle">
-                    <ul>
-                        {/* eslint-disable-next-line */}
-                        <li className={SingUpModal ? "is-active" : null}><a onClick={modalsHandle} id="register">S'inscrire</a></li>
-                        {/* eslint-disable-next-line */}
-                        <li className={SingInModal ? "is-active" : null}><a onClick={modalsHandle} id="login">Se connecter</a></li>
-                    </ul>
-                </div>
 
-                {/* <div class="tabs is-centered is-boxed">
-                    <ul>
-                        
-                    </ul>
-                </div> */}
-
-                <div className="form">
-                    {SingInModal && <Login />}
-                    {SingUpModal && <Register />}
-                </div>
-
+        <>
+            <div class="tabs is-centered is-toggle">
+                <ul>
+                    {/* eslint-disable-next-line */}
+                    <li className={SingUpModal ? "is-active" : null}><a onClick={modalsHandle} id="register">S'inscrire</a></li>
+                    {/* eslint-disable-next-line */}
+                    <li className={SingInModal ? "is-active" : null}><a onClick={modalsHandle} id="login">Se connecter</a></li>
+                </ul>
             </div>
-        </div>
+            <div className="log-form">
+                <div className="form-container">
+                    
+                    <div className="form">
+                        {SingInModal && <Login />}
+                        {SingUpModal && <Register />}
+                    </div>
+
+                </div>
+            </div>
+        
+        </>
 
     )
 }

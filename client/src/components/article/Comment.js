@@ -30,10 +30,17 @@ export default function Comment({ article }) {
                 <>
                     <div className="spacer"></div>
 
-                    <div className="form">
-                        <textarea name="comment" id="comment" onChange={(e) => setComment(e.target.value)}></textarea>
-                        <input type="submit" className="submit-btn" onClick={handlePostComment}/>
-                    </div>
+                    <article className="form media">
+                        <div className="media-content">
+                            <textarea name="comment" id="comment" onChange={(e) => setComment(e.target.value)}></textarea>
+                            <div class="field">
+                                <p class="control">
+                                <br />
+                                <input type="submit" className="button is-info" onClick={handlePostComment}/>
+                                </p>
+                            </div>
+                        </div>
+                    </article>
                 </>
             )}
 

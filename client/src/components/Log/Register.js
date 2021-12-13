@@ -66,7 +66,10 @@ export default function Register() {
     return (
         <>
         {formSubmit && (
-            <h4 className="succes">Engistrement terminer, vous pouvez vous connecter !</h4>
+            <div class="notification is-success">
+            Engistrement terminé, <strong>vous pouvez vous connecter</strong> !
+          </div>
+            
         )}
 
             <div>
@@ -76,6 +79,7 @@ export default function Register() {
                         <label htmlFor="username" className="label">Username</label>
                         <div className="control">
                             <input type="text" name="username" id="username" className="input" autoComplete="off" onChange={(event) => setUsername(event.target.value)} value={username}/>
+                            <p class="help is-danger error username"></p>
                         </div>
                     </div>
 
@@ -83,6 +87,7 @@ export default function Register() {
                         <label htmlFor="email" className="label">Email</label>
                         <div className="control">
                             <input type="email" name="email" id="email" className="input" autoComplete="off" onChange={(event) => setEmail(event.target.value)} value={email} />
+                            <p class="help is-danger error email"></p>
                         </div>
                     </div>
 
@@ -90,6 +95,7 @@ export default function Register() {
                         <label htmlFor="password" className="label">Mot de passe</label>
                         <div className="control">
                             <input type="password" name="password" id="password" className="input" autoComplete="off" onChange={(event) => setPassword(event.target.value)} value={password} />
+                            <p class="help is-danger error password"></p>
                         </div>
                     </div>
 
@@ -97,6 +103,7 @@ export default function Register() {
                         <label htmlFor="password" className="label">Confirmer Mot de Passe</label>
                         <div className="control">
                             <input type="password" name="password" id="password" className="input" autoComplete="off" onChange={(event) => setPasswordConfirm(event.target.value)} value={passwordConfirm} />
+                            <p class="help is-danger error passwordConfirm"></p>
                         </div>
                     </div>
 

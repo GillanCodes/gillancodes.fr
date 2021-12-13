@@ -30,7 +30,7 @@ module.exports.signin = async(req,res) => {
     try {
         const user = await userModel.login(username, password);
         const token = createToken(user._id);
-        res.cookie('gillancodes_user', token, {httpOnly: true, maxAge, sameSite:"none"});
+        res.cookie('gillancodes_user', token, {httpOnly: true, maxAge});
         res.status(201).json({user:user.username});
     } catch (error) {
         const errors = loginUserErrors(error);

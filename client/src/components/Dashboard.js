@@ -35,11 +35,15 @@ export default function Dashboard() {
                     ):(
                         <div className="dashboard-container">
 
-                            <div className="tabs is-toggle is-centered">
+                            <div className="tabs">
                                 <ul>
+                                    {/* eslint-disable-next-line */}
                                     <li className={active === "default" ? "is-active": ""}><a onClick={(e) => setActive('default')}>Dashboard</a></li>
-                                    {userData.permissions.ADMIN === true && <li className={active === "redirect" ? "is-active": ""}><a onClick={(e) => setActive('redirect')}>Redirect</a></li>}
+                                    {/* eslint-disable-next-line */}
+                                    {userData.permissions.ADMIN === true && <li className={active === "redirect" ? "is-active": "" }><a onClick={(e) => setActive('redirect')}>Redirect</a></li>}
+                                    {/* eslint-disable-next-line */}
                                     {userData.permissions.AUTHOR === true && <li className={active === "posts" ? "is-active": ""}><a onClick={(e) => setActive('posts')}>Posts</a></li>}
+                                    {/* eslint-disable-next-line */}
                                     {userData.permissions.MOD === true && userData.permissions.ADMIN === true && <li className={active === "users" ? "is-active": ""}><a onClick={(e) => setActive('users')}>Users</a></li>}
                                 </ul>
                             </div>

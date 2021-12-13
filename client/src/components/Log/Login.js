@@ -5,12 +5,11 @@ export default function Login() {
     
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [NotificationDisplay, setNotificationDisplay] = useState(false);
     
     const handleLogin = (event) => {
 
         event.preventDefault();
-        const usernameError = document.querySelector('.username.error');
-        const passwordError = document.querySelector('.password.error');
 
         axios({
             method:'post',
@@ -22,11 +21,11 @@ export default function Login() {
             },
         }).then((res) => {
 
-            console.log(res)
-
             if (res.data.errors) {
-                usernameError.innerHTML = res.data.errors.username;
-                passwordError.innerHTML = res.data.errors.password;
+                setNotificationDisplay(true);
+                const Error = document.querySelector('.error');
+                if (res.data.errors.username) Error.innerHTML = res.data.errors.username;
+                if (res.data.errors.password) Error.innerHTML = res.data.errors.password;
             } else {
                 window.location = '/';
             }
@@ -41,6 +40,13 @@ export default function Login() {
 
         <div>
             <form action="" method="post" onSubmit={handleLogin}>
+
+                {NotificationDisplay && (
+                    <>
+                        <div class="notification is-danger is-light error">
+                        </div>
+                    </>
+                )}
 
             <div className="field">
                 <label htmlFor="password" className="label">Username</label>

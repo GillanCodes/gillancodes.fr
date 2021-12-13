@@ -51,18 +51,18 @@ export default function ArticleView(props) {
 												<i className="fas fa-edit" title="Modifier le profil" onClick={() => window.location = `/dashboard/article/${props.article._id}` }></i> <br />
 											</p>
 										)} */}
-										<div className="head">
+										<div className="article-head">
 												<h1 className="title">{props.article.title}</h1>
 										</div>
 										{cut === "full" ? (
-											<div className="body" dangerouslySetInnerHTML={{__html: content}}></div>
+											<div className="article-body" dangerouslySetInnerHTML={{__html: content}}></div>
 										): (
 											<>
 												<div className="body" dangerouslySetInnerHTML={{__html: content.slice(0, cut) + " ..."}}></div>
 												<p className="button" onClick={() => window.location = '/article/' + props.article._id}>Lire la suite</p>
 											</>
 										)}
-										<div className="footer">
+										<div className="article-footer">
 											Ecrit par : <UserInfo username={props.article.author} linked withBadges/>
 											<div className="menu">
 											{isOpen === false && (
