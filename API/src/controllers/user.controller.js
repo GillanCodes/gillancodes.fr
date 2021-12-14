@@ -149,11 +149,11 @@ module.exports.updatePermissions = (req, res) => {
 
     if (res.locals.user) {
 
-        if (res.locals.user.permissions.get('ADMIN')) {
+        if (res.locals.user.permissions.has('ADMIN')) {
 
             const updatedRecord = {
                 permissions: {
-                    ADMIN,
+                    ADMIN,      
                     MOD,
                     AUTHOR,
                     DEV
