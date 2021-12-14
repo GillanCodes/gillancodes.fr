@@ -51,20 +51,20 @@ export default function Login() {
             <div className="field">
                 <label htmlFor="password" className="label">Username</label>
                 <div className="control">
-                    <input type="text" name="username" id="username" className='input' onChange={(event) => setUsername(event.target.value)} value={username}/>
+                    <input type="text" name="username" id="username" className='input' autoComplete="off" onChange={(event) => setUsername(event.target.value)} value={username}/>
                 </div>
             </div>
 
             <div className="field">
                 <label htmlFor="password" className="label">Password</label>
                 <div className="control">
-                    <input type="password" name="password" id="password" className='input' onChange={(event) => setPassword(event.target.value)}  value={password}/>
+                    <input type="password" name="password" id="password" className='input' autoComplete="off" onChange={(event) => setPassword(event.target.value)}  value={password}/>
                 </div>
             </div>
 
             <div class="field">
                 <p class="control">
-                    <input type="submit" value="Se Connecter" className='button is-info' />
+                    <input type="submit" value="Se Connecter" className='btn' />
                 </p>
             </div>
 

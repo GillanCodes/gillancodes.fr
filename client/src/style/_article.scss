@@ -2,7 +2,7 @@
     
     padding-top: 1em;
 
-    width: 600px;
+    width: 60%;
     margin: auto;
 
     .article {
@@ -12,6 +12,9 @@
     
         border: 2px $dark1 solid;
         border-radius: 10px;
+        box-shadow: 5px 2px 20px 0px $dark1;
+
+        
     
         .content{
             margin: 1em;
@@ -88,7 +91,7 @@
                 border : 2px $dark1 solid;
                 border-radius: 5px;
                 width: fit-content;
-                margin-left: 400px;
+                margin-top: 2em;
                 
 
                 i {

@@ -95,7 +95,7 @@ export default function Editor({ article }) {
             <input type="text" name="title" id="title" className="title" placeholder="Titre de l'article" onChange={(e) => setTitle(e.target.value)} value={title}/> <p className="button" onClick={handlePost}>Send</p>
             </div>
             <ReactQuill onChange={handleChange} modules={modules} value={text} theme={'snow'}></ReactQuill>
-            <p>Ecrit par : <UserInfo username={userData.username} withBadges userPic="big" /></p>
+            <p className="editor-foot">Ecrit par : <UserInfo username={userData.username} withBadges userPic="med" /></p>
         </div>
     )
 }

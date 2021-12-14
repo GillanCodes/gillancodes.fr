@@ -83,7 +83,7 @@
 
 }
 
-.content {
+.dashboard-content {
     padding-top: 100px;
 }
 
@@ -92,5 +92,59 @@
     width: 60%;
     margin: auto;
     text-align: center;
+
+    .usereditor {
+
+        .head {
+            display: flex;
+            
+        }
+
+        .profil {
+
+            input, textarea {
+                border: none;
+                background-color: $dark1;
+                color: $text-color1;
+                font-size: 20px;
+                padding: 5px;
+                border-radius: 5px;
+                margin: 5px;
+                resize: none;
+            }
+
+            textarea {
+                width: 70%;
+                height: 250px;
+                
+            }
+
+            i{
+                font-size: 25px;
+            }
+        }
+
+        .btn {
+            padding: 1em;
+            background-color: $light2   ;
+            color: $dark1;
+            font-weight: 500;
+            transition-duration: 200ms;
+            cursor: pointer;
+            border-radius: 10px;
+
+            width: 100px;
+            margin: auto;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        .btn:hover {
+            background-color: $light1;
+            transition-duration: 200ms;
+        }
+
+    }
+
 }
 

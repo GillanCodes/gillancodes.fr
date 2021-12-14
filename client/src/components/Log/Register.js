@@ -109,7 +109,7 @@ export default function Register() {
 
                     <div class="field">
                     <p class="control">
-                        <input type="submit" value="S'enregister" className='button is-info' />
+                        <input type="submit" value="S'enregister" className='btn' />
                     </p>
                 </div>
 
