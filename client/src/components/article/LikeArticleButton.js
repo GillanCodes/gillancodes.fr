@@ -25,18 +25,20 @@ export default function LikeArticleButton({ article }) {
         } else {
             setLiked(false);
         }
-        // eslint-disable-next-line
-    }, [uid]);
+    }, [uid, article.likers, liked]);
     
     return (
         <>
             {uid && liked === false && (
-                <i className="far fa-heart" onClick={like}></i>
+                
+                <p className="lenght"><i className="far fa-heart" onClick={like}></i> {article.likers.length}</p>
             )}
 
             {uid && liked === true && (
-                <i className="fas fa-heart liked" onClick={unlike}></i> 
+                <p className="lenght"><i className="fas fa-heart liked" onClick={unlike}></i>  {article.likers.length}</p>
+                
             )}
+            
         </>
     )
 }

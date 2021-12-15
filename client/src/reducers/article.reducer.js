@@ -11,7 +11,7 @@ export default function articleReducer(state = initialState, action){
                 if (article._id === action.payload.articleId){
                     return {
                         ...article,
-                        likers: [action.payload.articleId, ...article.likers]
+                        likers: [action.payload.userId, ...article.likers]
                     }
                 }
                 return article
