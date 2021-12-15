@@ -16,9 +16,9 @@ export default function ArticleThread() {
     }, [articlesData])
 
     return (
-        <div className="container">
+        <div className="container" key="test">
 
-            <div className="thread-head">
+            <div className="thread-head" key="test2">
                 <h1 className="title">Articles</h1>
             </div>
 
@@ -26,7 +26,11 @@ export default function ArticleThread() {
                 
                 <div className="articleContainer">
                     {articlesData.map((article) => {
-                            return <ArticleView article={article} cutter={article.body.length > 700 ? "700" : "full"} />  
+                            return (
+                                <div key={article.body}>
+                                    <ArticleView article={article} cutter={article.body.length > 700 ? "700" : "full"}  /> 
+                                </div>
+                            ) 
                     })}
                 </div>
 

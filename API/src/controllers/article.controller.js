@@ -57,21 +57,30 @@ module.exports.articleEdit = (req, res) => {
     if (!isValidObjectId(req.params.id)) 
         return res.status(200).send('invalid id');
 
-    try {
-        articleModel.findByIdAndUpdate(
-            req.params.id, {
-                $set: {
-                    title : req.body.title,
-                    body : req.body.article,
-                    isEdited: true,
-                    isPublish: req.body.isPublish
-                }
-            }, (err, data) => {
-                if (!err) res.status(201).send(data)
-                else console.log(err);
-            })
-    } catch (error) {
-        console.log(error);
+    if (res.locals.user) {
+
+        if (locals.user.permissions.has('AUTHOR')) {
+            try {
+                articleModel.findByIdAndUpdate(
+                    req.params.id, {
+                        $set: {
+                            title : req.body.title,
+                            body : req.body.article,
+                            isEdited: true,
+                            isPublish: req.body.isPublish
+                        }
+                    }, (err, data) => {
+                        if (!err) res.status(201).send(data)
+                        else console.log(err);
+                    })
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            return res.status(403).send('Forbidden action')
+        }
+    } else {
+        return res.status(401).send('unauthorized action')
     }
 }
 

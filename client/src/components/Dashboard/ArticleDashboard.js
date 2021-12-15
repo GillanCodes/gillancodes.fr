@@ -21,24 +21,24 @@ export default function ArticleDashboard() {
 
     return (
         <>
-         {!isLoading ? (
-            <>
-                {id ? (
-                    <>
-                        {articlesData.map((article) => {
-                            if (article._id === id) {
-                                return <Editor article={article} key={article._id} />
-                            }
-                            return null
-                        })}
-                    </>
-                ): (
-                    <Editor />
-                )}
-            
-            </>
+            {id ? (
+                <>
+                    {!isLoading ? (
+                        <>
+                            {articlesData.map((article) => {
+                                if (article._id === id) {
+                                    return <Editor article={article} key={article._id} />
+                                }
+                                return null
+                            })}
+                        </>
+                    ): (
+                        <h1>LOADING</h1>
+                    )}
+                
+                </>
          ) : (
-            <h1>LOADING</h1>
+            <Editor />
          )}
         
         </>

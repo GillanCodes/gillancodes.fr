@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
+import ReactTooltip from 'react-tooltip';
 import { isEmpty } from './../Utils';
-import ReactToolTip from 'react-tooltip';
 
 export default function UserInfo(props) {
     
@@ -32,6 +32,9 @@ export default function UserInfo(props) {
                                 )}
                                 {props.userPic === "small" && (
                                     <img src={user.userpic} alt={user.userName} className="icon-small"/>
+                                )}
+                                {props.userPic === "extra-small" && (
+                                    <img src={user.userpic} alt={user.userName} className="icon-xsmall"/>
                                 )}
                 
                                 {props.linked ? (
@@ -65,7 +68,7 @@ export default function UserInfo(props) {
                                                     )}
                                                 </> 
                                             )}
-                                            <ReactToolTip place="top"/>
+                                            <ReactTooltip place="top"/>
                                     </div>
                             </div>
                         )

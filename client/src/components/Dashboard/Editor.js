@@ -36,7 +36,9 @@ export default function Editor({ article }) {
         const data = {
                 title: title,
                 article: text,
-                isPublish
+                author: userData.username,
+                isPublish,
+
             }
 
         if(article) {

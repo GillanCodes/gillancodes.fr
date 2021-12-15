@@ -86,18 +86,28 @@
             // display: flex;
             // align-items: center;
 
-            .menu {
-                font-size: 20px;
-                border : 2px $dark1 solid;
-                border-radius: 5px;
-                width: fit-content;
-                margin-top: 2em;
-                
+            .menus {
+                display: flex;
 
-                i {
-                    padding: 10px;
+                .menu {
+                    font-size: 20px;
+                    border-radius: 5px;
+                    width: fit-content;
+                    display: flex;
+                    align-items: center;
+                    
+    
+                    i {
+                        padding: 10px;
+                    }
                 }
             }
+
+            .author {
+                display: flex;
+            }
+
+            
         }
 
         p.button {

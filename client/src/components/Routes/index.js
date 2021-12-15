@@ -4,11 +4,13 @@ import Article from '../Article'
 import ArticleThread from '../ArticleThread'
 import Dashboard from '../Dashboard'
 import ArticleDashboard from '../Dashboard/ArticleDashboard'
+import ArticleDelete from '../Dashboard/ArticleDelete'
 import UserEditor from '../Dashboard/UserEditor'
 import Home from '../Home'
 import Navbar from '../Navbar'
 import Profil from '../Profil'
 import UserSettings from '../Profil/UserSettings'
+
 
 export default function index() {
 
@@ -26,6 +28,7 @@ export default function index() {
                 <Route path="/dashboard" exact component={Dashboard} />
                 <Route path="/dashboard/user/:username" exact component={UserEditor} />
                 <Route path="/dashboard/article/:id" exact component={ArticleDashboard} />
+                <Route path="/dashboard/article/:id/delete" exact component={ArticleDelete} />
             </Switch>
         </BrowserRouter>
     )

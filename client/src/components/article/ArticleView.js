@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import ReactTooltip from 'react-tooltip';
 import UserInfo from '../Profil/UserInfo';
 import { isEmpty } from '../Utils';
 import Comment from './Comment';
@@ -33,24 +34,19 @@ export default function ArticleView(props) {
 
 		useEffect(() => {
 			if (!isEmpty(props)){
-				// if (!isEmpty(userData)) {
-				// 	if (userData.permissions.AUTHOR ||userData.permissions.ADMIN) {
-				// 		setisAuthor(true);
-				// 	}
-				// }
+				if (!isEmpty(userData)) {
+					if (userData.username === props.article.author ||userData.permissions.ADMIN) {
+						setisAuthor(true);
+					}
+				}
 				setIsLoading(false);
 			}
-		}, [props, isLoading]);
+		}, [props, isLoading, userData]);
 		
 		return (
 				<div className="article">
 								{!isLoading && (
 									<div className="content">
-										{/* {isAuthor && (
-											<p className="button">
-												<i className="fas fa-edit" title="Modifier le profil" onClick={() => window.location = `/dashboard/article/${props.article._id}` }></i> <br />
-											</p>
-										)} */}
 										<div className="article-head">
 												<h1 className="title">{props.article.title}</h1>
 										</div>
@@ -63,18 +59,33 @@ export default function ArticleView(props) {
 											</>
 										)}
 										<div className="article-footer">
-											Ecrit par : <UserInfo username={props.article.author} linked withBadges/>
-											<div className="menu">
-											{isOpen === false && (
-												<i className="far fa-comments" onClick={(e)=> setIsOpen(!isOpen)}></i>
-											)}
+											<div className="author">
+												<p>Ecrit par : </p> <UserInfo username={props.article.author} linked withBadges userPic="extra-small" />
+											</div>
+											<div className="menus">
+												<div className="menu">
+													{isOpen === false && (
+														<i className="far fa-comments" onClick={(e)=> setIsOpen(!isOpen)}></i>
+													)}
+														
+													{isOpen === true && (
+														<i className="fas fa-comments" onClick={(e)=> setIsOpen(!isOpen)}></i>
+													)}
+													<LikeArticleButton article={props.article} />
+													<i className="fas fa-share-square"></i>
+												</div>
+												{isAuthor && (
+													<div className="admin menu">
+														<i className="fas fa-edit" data-tip="Modifier l'article" onClick={() => window.location = `/dashboard/article/${props.article._id}` }></i>
+														<i className="fas fa-edit" data-tip="Supprimer l'article" onClick={() => window.location = `/dashboard/article/${props.article._id}` }></i>
+														<ReactTooltip place="top"/>
+													</div>
+													
+													)}
 												
-											{isOpen === true && (
-												<i className="fas fa-comments" onClick={(e)=> setIsOpen(!isOpen)}></i>
-											)}
-											<LikeArticleButton article={props.article} />
-											<i className="fas fa-share-square"></i>
-										</div>
+											</div>
+
+										
 									</div>
 									{isOpen && (
 										<Comment article={props.article} />

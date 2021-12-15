@@ -31,9 +31,12 @@ function App() {
 
 
   return (
-    <UidContext.Provider value={Uid}>
-      <Routes />
-    </UidContext.Provider>
+    <>
+      <UidContext.Provider value={Uid}>
+        <Routes />
+      </UidContext.Provider>
+    </>
+    
   );
 }
 
