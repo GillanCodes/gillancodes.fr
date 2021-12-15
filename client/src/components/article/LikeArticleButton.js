@@ -19,14 +19,14 @@ export default function LikeArticleButton({ article }) {
         dispatch(dislikeArticle(article._id, uid))
         setLiked(false);
     }
-
     useEffect(() => {
         if (article.likers.includes(uid)) {
             setLiked(true);
         } else {
-            setLiked(false)
+            setLiked(false);
         }
-    }, [uid, article.likers, liked]);
+        // eslint-disable-next-line
+    }, [uid]);
     
     return (
         <>
