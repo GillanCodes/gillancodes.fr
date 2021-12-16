@@ -93,6 +93,34 @@ module.exports.articleEdit = (req, res) => {
     }
 }
 
+module.exports.publishArticle = (req, res) => {
+    if (!isValidObjectId(req.params.id)) 
+        return res.status(200).send('invalid id');
+
+    if (res.locals.user) {
+
+        if (res.locals.user.permissions.has('AUTHOR') || res.locals.user.permissions.has('ADMIN') || res.locals.user.permissions.has('DEV')) {
+            try {
+                articleModel.findByIdAndUpdate(
+                    req.params.id, {
+                        $set: {
+                            isPublish: req.body.isPublish
+                        }
+                    }, (err, data) => {
+                        if (!err) res.status(201).send(data)
+                        else console.log(err);
+                    })
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            return res.status(403).send('Forbidden action')
+        }
+    } else {
+        return res.status(401).send('unauthorized action')
+    }
+}
+
 module.exports.articleDelete = async (req, res) => {
     if (!isValidObjectId(req.params.id)) 
         return res.status(200).send('invalid id');

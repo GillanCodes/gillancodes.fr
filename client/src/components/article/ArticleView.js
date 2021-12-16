@@ -36,7 +36,7 @@ export default function ArticleView(props) {
 		const statePublish = () => {
 				axios({
 					method: "put",
-					url: `${process.env.REACT_APP_API_URL}/api/article/${props.article._id}/edit/`,
+					url: `${process.env.REACT_APP_API_URL}/api/article/${props.article._id}/publish/`,
 					data : {
 						isPublish: !props.article.isPublish
 					},
@@ -62,12 +62,12 @@ export default function ArticleView(props) {
 		}, [props, isLoading, userData]);
 		
 		return (
-				<div className="article">
+				<div className="article" id={props.article.title}>
 								{!isLoading && (
 									<div className="content">
 										<div className="article-head">
-												<h1 className="title">{props.article.title}</h1>
-												{props.article.isDelete && (<p className="error"><i className="fas fa-backspace"></i> Delete Article</p>	)}
+												<h1 className="title">{props.article.title} {props.article.isEdited && (<i className="fas fa-reply-all edit-icon" data-tip="Edited"></i>)}</h1>
+												{props.article.isDelete && (<p className="error"><i className="fas fa-backspace"></i> Delete Article</p>)}
 												{!props.article.isPublish && !props.article.isDelete && (<p className="error"><i className="fas fa-upload"></i> Unpublished Article</p>	)}	
 										</div>
 										{cut === "full" ? (
@@ -76,6 +76,7 @@ export default function ArticleView(props) {
 											<>
 												<div className="body" dangerouslySetInnerHTML={{__html: content.slice(0, cut) + " ..."}}></div>
 												<p className="button" onClick={() => window.location = '/article/' + props.article._id}>Lire la suite</p>
+												
 											</>
 										)}
 										<div className="article-footer">

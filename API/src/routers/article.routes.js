@@ -8,6 +8,7 @@ router.get('/:id', articleRoutes.getArticle);
 
 router.post('/post', articleRoutes.articlePost);
 router.put('/:id/edit', articleRoutes.articleEdit);
+router.put('/:id/publish', articleRoutes.publishArticle);
 router.delete('/:id/delete', articleRoutes.articleDelete);
 
 router.patch('/like/:id', articleRoutes.likeArticle);
