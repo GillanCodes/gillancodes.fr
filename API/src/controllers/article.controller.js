@@ -10,7 +10,7 @@ module.exports.getArticles = async(req,res) => {
         const articles = await articleModel.find();
         res.status(200).json(articles);
     } else {
-        const articles = await articleModel.find({isPublish: true});
+        const articles = await articleModel.find({isPublish: true, isDelete: false});
         res.status(200).json(articles);
     }
 
@@ -37,18 +37,27 @@ module.exports.getArticle = (req,res) => {
 
 module.exports.articlePost = async (req, res) => {
 
-            const newArticle = new articleModel({
-                title: req.body.title,
-                body: req.body.article,
-                author: req.body.author
-            });
-        
-            try {
-                const article = await newArticle.save();
-                res.status(201).json(article);
-            } catch(err) {
-                let errors = articleErrors(err);
-                res.status(200).send({errors});
+            if (res.locals.user) {
+
+                if (res.locals.user.permissions.has('ADMIN') || res.locals.user.permissions.has('AUTHOR') || res.locals.user.permissions.has('DEV')) {
+                    const newArticle = new articleModel({
+                        title: req.body.title,
+                        body: req.body.article,
+                        author: req.body.author
+                    });
+                
+                    try {
+                        const article = await newArticle.save();
+                        res.status(201).json(article);
+                    } catch(err) {
+                        let errors = articleErrors(err);
+                        res.status(200).send({errors});
+                    }
+                } else {
+                    return res.status(403).send('Forbidden action')
+                }
+            } else {
+                return res.status(401).send('unauthorized action')
             }
 
 }
@@ -59,7 +68,7 @@ module.exports.articleEdit = (req, res) => {
 
     if (res.locals.user) {
 
-        if (locals.user.permissions.has('AUTHOR')) {
+        if (res.locals.user.permissions.has('AUTHOR') || res.locals.user.permissions.has('ADMIN') || res.locals.user.permissions.has('DEV')) {
             try {
                 articleModel.findByIdAndUpdate(
                     req.params.id, {
@@ -88,29 +97,40 @@ module.exports.articleDelete = async (req, res) => {
     if (!isValidObjectId(req.params.id)) 
         return res.status(200).send('invalid id');
 
-    try {
+
+    if (res.locals.user) {
+
+        if (res.locals.user.permissions.has('AUTHOR') || res.locals.user.permissions.has('ADMIN') || res.locals.user.permissions.has('DEV')) {
+            try {
         
-        const article = await articleModel.findOne({_id: req.params.id});
-
-        if (article.isDelete) {
-
-            articleModel.findByIdAndRemove(req.params.id, (err, data) => {
-                if (err) console.log(err)
-                else res.status(200).send(data);
-            });
-
+                const article = await articleModel.findOne({_id: req.params.id});
+        
+                if (article.isDelete) {
+        
+                    articleModel.findByIdAndRemove(req.params.id, (err, data) => {
+                        if (err) console.log(err)
+                        else res.status(200).send(data);
+                    });
+        
+                } else {
+                    articleModel.findByIdAndUpdate(req.params.id, {
+                        $set: {isDelete: true}
+                    }, (err, data) => {
+                        if (err) console.log(err)
+                        else res.status(201).send(data);   
+                    })
+                }
+        
+            } catch (error) {
+                console.log(error);
+            }
         } else {
-            articleModel.findByIdAndUpdate(req.params.id, {
-                $set: {isDelete: true}
-            }, (err, data) => {
-                if (err) console.log(err)
-                else res.status(201).send(data);   
-            })
+            return res.status(403).send('Forbidden action')
         }
-
-    } catch (error) {
-        console.log(error);
+    } else {
+        return res.status(401).send('unauthorized action')
     }
+   
 
 }
 

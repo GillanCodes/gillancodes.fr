@@ -2,13 +2,15 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import UserInfo from '../Profil/UserInfo';
 import {Switch} from '@mui/material';
+import { getArticles } from '../../actions/article.action';
 
 export default function Editor({ article }) {
 
     const userData = useSelector(state => state.userReducer);
+    const dispatch = useDispatch();
 
     const [title, setTitle] = useState(article ? article.title : "");
     const [text, setText] = useState(article ? article.body : "");
@@ -53,21 +55,24 @@ export default function Editor({ article }) {
                         return error.innerHTML = res.data.errors.title;
                     setLink(res.data._id);
                     setIsPost(true);
-                    
+                    dispatch(getArticles());
                 }).catch((err) => {
                     error.innerHTML = "Une erreur est survenue ! Si vous pensez que cela est un bug merci de contacter un administrateur";
                     console.log(err);
                 })
         } else {
-            await axios
-                .post(`${process.env.REACT_APP_API_URL}/api/article/post`, data)
-                .then((res) => {
+            await axios({
+                method: 'post',
+                url: `${process.env.REACT_APP_API_URL}/api/article/post`,
+                withCredentials: true,
+                data
+            }).then((res) => {
                     console.log(res.data);
                     if (res.data.errors) 
                         return error.innerHTML = res.data.errors.title;
                     setLink(res.data._id);
                     setIsPost(true);
-                    
+                    dispatch(getArticles());
                 }).catch((err) => {
                     error.innerHTML = "Une erreur est survenue ! Si vous pensez que cela est un bug merci de contacter un administrateur";
                     console.log(err);

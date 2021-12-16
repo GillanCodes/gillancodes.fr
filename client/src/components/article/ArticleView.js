@@ -1,6 +1,8 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
+import { getArticles } from '../../actions/article.action';
 import UserInfo from '../Profil/UserInfo';
 import { isEmpty } from '../Utils';
 import Comment from './Comment';
@@ -15,6 +17,7 @@ export default function ArticleView(props) {
 
 	// eslint-disable-next-line
 	const userData = useSelector(state => state.userReducer);
+	const dispatch = useDispatch();
 
 		const cut = props.cutter ? props.cutter : "full";
 
@@ -29,6 +32,21 @@ export default function ArticleView(props) {
 				}
 				return doc.body.innerHTML;
 		};
+
+		const statePublish = () => {
+				axios({
+					method: "put",
+					url: `${process.env.REACT_APP_API_URL}/api/article/${props.article._id}/edit/`,
+					data : {
+						isPublish: !props.article.isPublish
+					},
+					withCredentials: true
+				}).then((res) => {
+					dispatch(getArticles());
+				}).catch((err) => console.log(err));
+			
+
+		}
 
 		const content = sanitize(props.article.body);
 
@@ -49,6 +67,8 @@ export default function ArticleView(props) {
 									<div className="content">
 										<div className="article-head">
 												<h1 className="title">{props.article.title}</h1>
+												{props.article.isDelete && (<p className="error"><i className="fas fa-backspace"></i> Delete Article</p>	)}
+												{!props.article.isPublish && !props.article.isDelete && (<p className="error"><i className="fas fa-upload"></i> Unpublished Article</p>	)}	
 										</div>
 										{cut === "full" ? (
 											<div className="article-body" dangerouslySetInnerHTML={{__html: content}}></div>
@@ -76,8 +96,13 @@ export default function ArticleView(props) {
 												</div>
 												{isAuthor && (
 													<div className="admin menu">
-														<i className="fas fa-edit" data-tip="Modifier l'article" onClick={() => window.location = `/dashboard/article/${props.article._id}` }></i>
-														<i className="fas fa-edit" data-tip="Supprimer l'article" onClick={() => window.location = `/dashboard/article/${props.article._id}` }></i>
+														<i className="fas fa-pencil-alt" data-tip="Modifier l'article" onClick={() => window.location = `/dashboard/article/${props.article._id}` }></i>
+														<i className="fas fa-trash-alt" data-tip="Supprimer l'article" onClick={() => window.location = `/dashboard/article/${props.article._id}/delete` }></i>
+														{props.article.isPublish ? (
+															<i className="fas fa-upload error" data-tip="Unpublish Article" onClick={() => statePublish()}></i>
+														) : (
+															<i className="fas fa-upload sucess" data-tip="Publish Article" onClick={() => statePublish()}></i>
+														)}
 														<ReactTooltip place="top"/>
 													</div>
 													
