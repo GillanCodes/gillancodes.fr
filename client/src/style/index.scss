@@ -7,6 +7,7 @@
 @import './editor';
 @import './articleThread';
 @import './dashboard';
+@import './components/deleteComp';
 
 // @import "../../node_modules/bulma/bulma.sass";
 
@@ -47,11 +48,11 @@ a {
 }
 
 .error {
-    color: $text-error;
+    color: $error;
 }
 
 .sucess {
-    color: rgb(160, 238, 141)
+    color: $sucess;
 }
 
 .userInfo {

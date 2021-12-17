@@ -4,10 +4,12 @@ import { userUpdate } from '../../actions/user.action';
 import UserInfo from './UserInfo';
 import { isEmpty } from './../Utils';
 import UplaodUserPic from './UplaodUserPic';
+import ArticleView from '../article/ArticleView';
 
 export default function ProfilPage() {
 
     const userData = useSelector((state) => state.userReducer);
+    const articleData = useSelector((state) => state.articleReducer);
     const [isLoading, setIsLoading] = useState(true);
 
             const [bio, setBio] = useState(userData.bio);
@@ -47,43 +49,63 @@ export default function ProfilPage() {
             {isLoading ? (
                 <h1>Loading</h1>
             ) : (
-                <div className="profilContainer">
-                    
-                    <div className="profilHeader">
-                    <div className='picture'>
-                        <img src={userData.userpic} alt={userData.username} className="profilPicture" />
-                        {updateProfil === true && (
-                            <UplaodUserPic />
-                        )}
-                    </div>
-                        <div className="profil">
-                            <UserInfo withBadges username={userData.username} />
-                            {updateProfil === true && (
-                                <>
-                                    <textarea name="bio" id="bio" className="bioInput" defaultValue={userData.bio} onChange={(e) => setBio(e.target.value)}></textarea> <br />
-                                    <i className="fas fa-link"></i> <input type="text" name="website" id="website" defaultValue={website} onChange={(e) => setWebsite(e.target.value)} className="linkInput"/> <br />
-                                    <i className="fab fa-github"></i> <input type="text" name="github" id="github" defaultValue={github} onChange={(e) => setGithub(e.target.value)} className="linkInput"/> <br />
-                                    <i className="fab fa-twitter"></i> <input type="text" name="twitter" id="twitter" defaultValue={twitter} onChange={(e) => setTwitter(e.target.value)} className="linkInput"/>
-                                </>
-                            )} 
-
-                            {updateProfil === false && (
-                                <>
-                                    <p className="bio">{userData.bio}</p>
-                                    {website && (<a href={website} target='_blank' rel="noreferrer" className="link"><i className="fas fa-link"></i></a>)}
-                                    {github && (<a href={"https://github.com/" + github} target='_blank' rel="noreferrer" className="link"><i className="fab fa-github"></i></a>)}
-                                    {twitter && (<a href={"https://twitter.com/" + twitter} target='_blank' rel="noreferrer" className="link"><i className="fab fa-twitter"></i></a>)}
-                                </>
-                            )}
-                            
-                        </div>
-                        <p className="custom-button">
-                            <i className="fas fa-edit" title="Modifier le profil" onClick={() => setUpdateProfil(!updateProfil)}></i> <br />
-                            {updateProfil === true && (
-                                <i className="fas fa-save" title="Enregistrer les modifications" onClick={updateHandle}></i>
-                            )}
-                        </p>
+                <div className='profile-page'>
+                    <div className="profilContainer">
                         
+                        <div className="profilHeader">
+                        <div className='picture'>
+                            <img src={userData.userpic} alt={userData.username} className="profilPicture" />
+                            {updateProfil === true && (
+                                <UplaodUserPic />
+                            )}
+                        </div>
+                            <div className="profil">
+                                <UserInfo withBadges username={userData.username} />
+                                {updateProfil === true && (
+                                    <>
+                                        <textarea name="bio" id="bio" className="bioInput" defaultValue={userData.bio} onChange={(e) => setBio(e.target.value)}></textarea> <br />
+                                        <i className="fas fa-link"></i> <input type="text" name="website" id="website" defaultValue={website} onChange={(e) => setWebsite(e.target.value)} className="linkInput"/> <br />
+                                        <i className="fab fa-github"></i> <input type="text" name="github" id="github" defaultValue={github} onChange={(e) => setGithub(e.target.value)} className="linkInput"/> <br />
+                                        <i className="fab fa-twitter"></i> <input type="text" name="twitter" id="twitter" defaultValue={twitter} onChange={(e) => setTwitter(e.target.value)} className="linkInput"/>
+                                    </>
+                                )} 
+
+                                {updateProfil === false && (
+                                    <>
+                                        <p className="bio">{userData.bio}</p>
+                                        {website && (<a href={website} target='_blank' rel="noreferrer" className="link"><i className="fas fa-link"></i></a>)}
+                                        {github && (<a href={"https://github.com/" + github} target='_blank' rel="noreferrer" className="link"><i className="fab fa-github"></i></a>)}
+                                        {twitter && (<a href={"https://twitter.com/" + twitter} target='_blank' rel="noreferrer" className="link"><i className="fab fa-twitter"></i></a>)}
+                                    </>
+                                )}
+                                
+                            </div>
+                            <p className="custom-button">
+                                <i className="fas fa-edit" title="Modifier le profil" onClick={() => setUpdateProfil(!updateProfil)}></i> <br />
+                                {updateProfil === true && (
+                                    <i className="fas fa-save" title="Enregistrer les modifications" onClick={updateHandle}></i>
+                                )}
+                            </p>
+                        
+                        </div>
+                    </div>
+                    <div className="profil-body">
+                        <div className="profil-tabs">
+                            <ul>
+                                <li>Posts</li>
+                                <li>Comments</li>
+                            </ul>
+                        </div>
+
+                    {userData.permissions.AUTHOR && (
+                        <div className="articleContainer profil-article">
+                            {articleData.map((article) => {
+                                if (article.author === userData.username) {
+                                    return <ArticleView article={article} cutter="500" />
+                                }
+                            })}
+                        </div>
+                    )}
                     </div>
                 </div>
             )}

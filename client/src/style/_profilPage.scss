@@ -101,6 +101,46 @@
 
 }
 
+.profil-body{
+    width: 90%;
+    margin: auto;
+
+    .profil-tabs {
+            ul {
+                display: flex;
+                list-style: none;
+    
+                width: 90%;
+                margin: auto;
+
+                margin-top: 1.5em;
+
+                justify-content: center;
+        
+                .is-active {
+                    background-color: $text-color1;
+                }
+        
+                li {
+                    margin-right: 10px;
+                    padding: 10px;
+                    background-color: $text-color2;
+                    border-radius: 10px;
+        
+                    a{
+                        color: $dark1;
+                    }
+        
+                    
+                }
+            }
+        
+        }
+    
+
+
+}
+
 .follow{
 margin: 0;
 }
@@ -114,3 +154,4 @@ margin: 0;
     object-fit: cover;
     margin-bottom: 30px;
 }
+

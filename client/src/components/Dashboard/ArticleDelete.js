@@ -21,12 +21,12 @@ export default function ArticleDelete() {
     
     
     return (
-        <div>
+        <div className='delete-fields'>
             <h1>Delete Article {id} ?</h1>
 
             <div className="buttons">
-                <p onClick={() => deleteHandle()}>Yes</p>
-                <p onClick={() => document.location = "/articles"}>No</p>
+                <p onClick={() => deleteHandle()} className='btn error'>Yes</p>
+                <p onClick={() => document.location = "/articles"} className='btn sucess'>No</p>
             </div>
         </div>
     )

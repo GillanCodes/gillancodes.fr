@@ -36,7 +36,7 @@ export default function Comment({ article }) {
                             <div class="field">
                                 <p class="control">
                                 <br />
-                                <input type="submit" className="button is-info" onClick={handlePostComment}/>
+                                <input type="submit" className="submit-btn" onClick={handlePostComment}/>
                                 </p>
                             </div>
                         </div>
