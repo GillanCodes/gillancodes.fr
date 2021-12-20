@@ -237,7 +237,10 @@ module.exports.deleteUser = (req, res) => {
         if (res.locals.user._id.toString() === req.params.id) {
             userModel.findByIdAndDelete(req.params.id, (err, data) => {
                 if (err) throw err;
-                else return res.send(data)
+                else {
+                    res.cookie('gillancodes_user', "", {httpOnly: true});
+                    return res.send(data);
+                }
             });
 
         } else {

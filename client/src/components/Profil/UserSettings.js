@@ -1,4 +1,5 @@
 import { Switch } from '@mui/material';
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { isEmpty } from '../Utils';
@@ -15,6 +16,19 @@ export default function UserSettings() {
             setIsLogged(true);
         }
     }, [userData])
+
+    const deleteHandle = () => {
+        axios({
+            method: "delete",
+            url: `${process.env.REACT_APP_API_URL}/api/user/delete/${userData._id}`,
+            withCredentials: true
+        }).then((res) => {
+            window.location = '/';
+        }).catch((err) =>{
+            console.log(err);
+        })
+
+    }
 
     return (
         <>
@@ -36,6 +50,10 @@ export default function UserSettings() {
                             {/* RoleView = Voir les items invisible pour les autres => Admin/author/mod ... 1 setting pour 1role  */}
                             {/* RoleToolView = Voir les outils (button delete/edit, stats, info comme "ispublish/isdelete" ...) => Admin/author/mod ... 1 setting pour 1role  */}
                             {/* Si ADMIN : 1 params */}
+                        </div>
+
+                        <div className="field">
+                            <p className="btn" onClick={() => deleteHandle()}>Delete account</p>
                         </div>
                     </div>
                 </div>
