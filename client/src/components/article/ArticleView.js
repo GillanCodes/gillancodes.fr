@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
 import { getArticles } from '../../actions/article.action';
 import UserInfo from '../Profil/UserInfo';
-import { isEmpty } from '../Utils';
+import { isEmpty, timestampParser } from '../Utils';
 import Comment from './Comment';
 import LikeArticleButton from './LikeArticleButton';
 
@@ -82,6 +82,9 @@ export default function ArticleView(props) {
 										<div className="article-footer">
 											<div className="author">
 												<p>Ecrit par : </p> <UserInfo username={props.article.author} linked withBadges userPic="extra-small" />
+											</div>
+											<div className="timestamp">
+												<p>{timestampParser(props.article.createdAt)}</p>
 											</div>
 											<div className="menus">
 												<div className="menu">

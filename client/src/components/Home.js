@@ -25,6 +25,9 @@ export default function Home() {
             {!isLoading ? (
                 
                 <div className="articleContainer">
+                    <div className="thread-head" key="test2">
+                        <h2 className="title">Dernier Article</h2>
+                    </div>
                     <ArticleView article={articlesData[0]} cutter={articlesData[0].body.length > 700 ? "700" : "full"}  /> 
                 </div>
 
@@ -32,6 +35,23 @@ export default function Home() {
             ): (
                 <h1>Loading</h1>
             )}
+
+            <div className="thread-head" key="test2">
+                <h1 className="title">A propos</h1>
+            </div>
+
+            <div className="about-container">
+
+            </div>
+
+
+            <div className="thread-head" key="test2">
+                <h1 className="title">Les Offres</h1>
+            </div>
+
+            <div className="offers-container">
+                
+            </div>
 
         </div>
     )
