@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { isEmpty } from '../Utils';
+import ProfileBody from './ProfileBody';
 import UserInfo from './UserInfo';
 
 export default function UserPage({ username }) {
@@ -23,6 +24,7 @@ export default function UserPage({ username }) {
                     {usersData.map((user) => {
                         if (user.username === username) {
                             return (
+                                <>
                                 <div className="profilContainer">
                                 <div className="profilHeader">
                                 <img src={user.userpic} alt={user.username} className="profilPicture" />
@@ -43,8 +45,13 @@ export default function UserPage({ username }) {
                                             </>
                                             
                                         )}
-                                    </div> 
+                                    </div>
+                                    
                                 </div>
+                                <div className="profil-body">
+                                    <ProfileBody user={user}/>
+                                </div>
+                                </>
                                 
                             )
                         }

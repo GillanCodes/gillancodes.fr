@@ -4,6 +4,7 @@ import { updatePermissionsUserAdmin, updateUserAdmin } from '../../actions/admin
 import UserInfo from '../Profil/UserInfo';
 import {Switch} from '@mui/material'
 import { getUsers } from '../../actions/users.action';
+import DeleteUser from './DeleteUser';
 
 export default function UserUpdator({ user }) {
 
@@ -66,6 +67,11 @@ export default function UserUpdator({ user }) {
                     <i className="fab fa-dev" data-tip="Dev"></i> <Switch checked={isDev} onChange={(e) => setIsDev(e.target.checked)} /> <br />
                     <i className="far fa-check-circle" data-tip="Certified User"></i> <Switch checked={isCertified} onChange={(e) => setIsCertified (e.target.checked)} /> <br />
                     <p className="btn" onClick={updateUserPermissions}>Save user Permission</p>
+                </div>
+
+
+                <div>
+                    <DeleteUser user={user} />
                 </div>
                 
             </>

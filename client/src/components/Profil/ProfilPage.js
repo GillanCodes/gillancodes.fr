@@ -4,12 +4,11 @@ import { userUpdate } from '../../actions/user.action';
 import UserInfo from './UserInfo';
 import { isEmpty } from './../Utils';
 import UplaodUserPic from './UplaodUserPic';
-import ArticleView from '../article/ArticleView';
+import ProfileBody from './ProfileBody';
 
 export default function ProfilPage() {
 
     const userData = useSelector((state) => state.userReducer);
-    const articleData = useSelector((state) => state.articleReducer);
     const [isLoading, setIsLoading] = useState(true);
 
             const [bio, setBio] = useState(userData.bio);
@@ -89,24 +88,7 @@ export default function ProfilPage() {
                         
                         </div>
                     </div>
-                    <div className="profil-body">
-                        <div className="profil-tabs">
-                            <ul>
-                                <li>Posts</li>
-                                <li>Comments</li>
-                            </ul>
-                        </div>
-
-                    {userData.permissions.AUTHOR && (
-                        <div className="articleContainer profil-article">
-                            {articleData.map((article) => {
-                                if (article.author === userData.username) {
-                                    return <ArticleView article={article} cutter="500" />
-                                }
-                            })}
-                        </div>
-                    )}
-                    </div>
+                    <ProfileBody user={userData} />
                 </div>
             )}
         </>

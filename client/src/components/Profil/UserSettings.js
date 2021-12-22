@@ -2,6 +2,7 @@ import { Switch } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
+import DeleteUser from '../Dashboard/DeleteUser';
 import { isEmpty } from '../Utils';
 import UserInfo from './UserInfo'
 
@@ -14,21 +15,10 @@ export default function UserSettings() {
     useEffect(() => {
         if(!isEmpty(userData)) {
             setIsLogged(true);
-        }
+        } 
     }, [userData])
 
-    const deleteHandle = () => {
-        axios({
-            method: "delete",
-            url: `${process.env.REACT_APP_API_URL}/api/user/delete/${userData._id}`,
-            withCredentials: true
-        }).then((res) => {
-            window.location = '/';
-        }).catch((err) =>{
-            console.log(err);
-        })
-
-    }
+    
 
     return (
         <>
@@ -52,9 +42,8 @@ export default function UserSettings() {
                             {/* Si ADMIN : 1 params */}
                         </div>
 
-                        <div className="field">
-                            <p className="btn" onClick={() => deleteHandle()}>Delete account</p>
-                        </div>
+                        <DeleteUser user={userData} />
+
                     </div>
                 </div>
             ) : (
