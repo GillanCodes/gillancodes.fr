@@ -84,7 +84,11 @@ export default function ArticleView(props) {
 												<p>Ecrit par : </p> <UserInfo username={props.article.author} linked withBadges userPic="extra-small" />
 											</div>
 											<div className="timestamp">
-												<p>{timestampParser(props.article.createdAt)}</p>
+												{props.article.isEdited ? (
+													<p>{timestampParser(props.article.updatedAt)}</p>
+												) : (
+													<p>{timestampParser(props.article.createdAt)}</p>
+												)}
 											</div>
 											<div className="menus">
 												<div className="menu">
