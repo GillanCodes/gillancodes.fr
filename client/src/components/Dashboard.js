@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { UidContext } from './App.context';
 import ArticleDashboard from './Dashboard/ArticleDashboard';
+import ArticlesList from './Dashboard/ArticlesList';
 import UsersList from './Dashboard/UsersList';
 import UserInfo from './Profil/UserInfo';
 import { isEmpty } from './Utils';
@@ -40,7 +41,7 @@ export default function Dashboard() {
                                     {/* eslint-disable-next-line */}
                                     <li className={active === "default" ? "is-active": ""}><a onClick={(e) => setActive('default')}>Dashboard</a></li>
                                     {/* eslint-disable-next-line */}
-                                    {userData.permissions.ADMIN === true && <li className={active === "redirect" ? "is-active": "" }><a onClick={(e) => setActive('redirect')}>Redirect</a></li>}
+                                    {userData.permissions.ADMIN === true && <li className={active === "articles" ? "is-active": "" }><a onClick={(e) => setActive('articles')}>Articles</a></li>}
                                     {/* eslint-disable-next-line */}
                                     {userData.permissions.AUTHOR === true && <li className={active === "posts" ? "is-active": ""}><a onClick={(e) => setActive('posts')}>Posts</a></li>}
                                     {/* eslint-disable-next-line */}
@@ -50,7 +51,7 @@ export default function Dashboard() {
 
                             <div className="dashboard-content">
 
-                                {userData.permissions.ADMIN === true && active === "redirect" && <h1>Redirect</h1>}
+                                {userData.permissions.ADMIN === true && active === "articles" && <ArticlesList />}
                                 {userData.permissions.MOD === true && active === "users" && <UsersList />}
                                 {userData.permissions.AUTHOR === true && active === "posts" && <ArticleDashboard />}
 
