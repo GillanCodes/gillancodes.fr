@@ -7,10 +7,10 @@ const userModel = require('../../models/user.model');
 module.exports.getArticles = async(req,res) => {
     
     if (res.locals.user && res.locals.user.permissions.has('AUTHOR') || res.locals.user && res.locals.user.permissions.has('ADMIN')) {
-        const articles = await articleModel.find();
+        const articles = await articleModel.find().sort({ createdAt: -1 });
         res.status(200).json(articles);
     } else {
-        const articles = await articleModel.find({isPublish: true, isDelete: false});
+        const articles = await articleModel.find({isPublish: true, isDelete: false}).sort({ createdAt: -1 });;
         res.status(200).json(articles);
     }
 

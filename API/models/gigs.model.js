@@ -20,6 +20,8 @@ const gigsSchema = new mongoose.Schema(
         banner: {
             type: String
         }
+    }, {
+        timestamps: true
     }
 )
 
