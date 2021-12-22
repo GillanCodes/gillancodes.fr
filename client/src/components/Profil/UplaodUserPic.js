@@ -30,17 +30,6 @@ export default function UploadUserPic() {
                     <div class="file has-name is-boxed is-small">
                         <label class="file-label">
                             <input class="file-input" type="file" accept='.jpg, .jpeg, .png' onChange={(e) => setFile(e.target.files[0])} />
-                            <span class="file-cta">
-                            <span class="file-icon">
-                                <i class="fas fa-upload"></i>
-                            </span>
-                            <span class="file-label">
-                                Choisir une photo
-                            </span>
-                            </span>
-                            <span class="file-name">
-                                {file ? file.name : ""}
-                            </span>
                         </label>
                     </div>
                 </div>
@@ -49,14 +38,6 @@ export default function UploadUserPic() {
                         <input type="submit" value="Changer" className='button is-info' />
                     </div>
                 </div>
-
-
-
-                {/* <label className="file">
-                    <input type="file" id="file" accept='.jpg, .jpeg, .png' onChange={(e) => setFile(e.target.files[0])} />
-                </label>
-                <br />
-                <input type="submit" value="Changer" /> */}
             </form>
         </div>
     )
