@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import ArticleView from './article/ArticleView';
-import Offers from './module/Offers';
+import OffersModule from './module/OffersModule';
 import { isEmpty } from './Utils';
 
 export default function Home() {
@@ -51,7 +51,7 @@ export default function Home() {
             </div>
 
             <div>
-                <Offers />
+                <OffersModule />
             </div>
 
         </div>

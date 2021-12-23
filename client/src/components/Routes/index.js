@@ -7,6 +7,7 @@ import ArticleDashboard from '../Dashboard/ArticleDashboard'
 import ArticleDelete from '../Dashboard/ArticleDelete'
 import UserEditor from '../Dashboard/UserEditor'
 import Home from '../Home'
+import Offers from '../Offers'
 import Navbar from '../Navbar'
 import Profil from '../Profil'
 import UserSettings from '../Profil/UserSettings'
@@ -19,6 +20,8 @@ export default function index() {
         <Navbar />
             <Switch>
                 <Route path="/" exact component={Home} />
+                <Route path="/offers" exact component={Offers} />
+
                 <Route path="/profil" exact component={Profil} />
                 <Route path="/profil/settings" exact component={UserSettings} />
                 <Route path="/profil/:username" exact component={Profil} />

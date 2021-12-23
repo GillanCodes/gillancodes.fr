@@ -134,7 +134,14 @@ footer.footer {
         ul {
             list-style: none;
             list-style-position: outside;
+
+            li a:hover{
+                color: $text-color1;
+                transition-duration: 100ms;
+            }
         }
+
+        
     }
 
 }
