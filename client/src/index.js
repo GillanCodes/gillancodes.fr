@@ -13,6 +13,7 @@ import logger from 'redux-logger';
 import { getArticles } from './actions/article.action';
 import { getUsers } from './actions/users.action';
 import ReactTooltip from 'react-tooltip';
+import { getEdito } from './actions/edito.action';
 
 const store = createStore(
   rootReducer, composeWithDevTools(applyMiddleware(thunk, logger))
@@ -20,6 +21,7 @@ const store = createStore(
 
 store.dispatch(getArticles());
 store.dispatch(getUsers());
+store.dispatch(getEdito());
 
 ReactDOM.render(
     <Provider store={store}>

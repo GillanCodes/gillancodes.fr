@@ -11,6 +11,7 @@ import Offers from '../Offers'
 import Navbar from '../Navbar'
 import Profil from '../Profil'
 import UserSettings from '../Profil/UserSettings'
+import EditoEditing from '../Dashboard/EditoEditing'
 
 
 export default function index() {
@@ -32,6 +33,9 @@ export default function index() {
                 <Route path="/dashboard/user/:username" exact component={UserEditor} />
                 <Route path="/dashboard/article/:id" exact component={ArticleDashboard} />
                 <Route path="/dashboard/article/:id/delete" exact component={ArticleDelete} />
+
+                <Route path="/dashboard/edito/:id" exact component={EditoEditing} />
+                <Route path="/dashboard/edito/" exact component={EditoEditing} />
             </Switch>
         </BrowserRouter>
     )

@@ -69,3 +69,14 @@ module.exports.articleErrors = (err) => {
 
     return errors;
 }
+
+module.exports.editoErrors = (err) => {
+    
+    let errors = {title: ""};
+
+    if (err.message.includes('title') && err.message.includes('shorter')){
+        errors.title = "Le titre fait moins de 3 caractere !";
+    }
+
+    return errors;
+}

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { UidContext } from './App.context';
 import ArticleDashboard from './Dashboard/ArticleDashboard';
 import ArticlesList from './Dashboard/ArticlesList';
+import EditosDashboard from './Dashboard/EditosDashboard';
 import UsersList from './Dashboard/UsersList';
 import UserInfo from './Profil/UserInfo';
 import { isEmpty } from './Utils';
@@ -46,6 +47,7 @@ export default function Dashboard() {
                                     {userData.permissions.AUTHOR === true && <li className={active === "posts" ? "is-active": ""}><a onClick={(e) => setActive('posts')}>Posts</a></li>}
                                     {/* eslint-disable-next-line */}
                                     {userData.permissions.MOD === true && userData.permissions.ADMIN === true && <li className={active === "users" ? "is-active": ""}><a onClick={(e) => setActive('users')}>Users</a></li>}
+                                    {userData.permissions.DEV === true && userData.permissions.ADMIN === true && <li className={active === "editos" ? "is-active": ""}><a onClick={(e) => setActive('editos')}>Editos</a></li>}
                                 </ul>
                             </div>
 
@@ -54,6 +56,7 @@ export default function Dashboard() {
                                 {userData.permissions.ADMIN === true && active === "articles" && <ArticlesList />}
                                 {userData.permissions.MOD === true && active === "users" && <UsersList />}
                                 {userData.permissions.AUTHOR === true && active === "posts" && <ArticleDashboard />}
+                                {userData.permissions.ADMIN === true && active === "editos" && <EditosDashboard />}
 
                                 {active === "default" && (
                                     <div className='default'>

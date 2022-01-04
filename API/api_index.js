@@ -4,6 +4,7 @@ require('./config/db');
 let gigsRoutes = require('./src/routers/gigs.routes');
 let userRoutes = require('./src/routers/user.routes');
 let articleRoutes = require('./src/routers/article.routes');
+let editoRoutes = require('./src/routers/edito.routes');
 // let adminRoutes = require('./src/routers/admin.routes')
 
 let {checkUser, home, requireAuth} = require('./middlewares/auth.middleware');
@@ -17,8 +18,15 @@ let cors = require('cors');
 let express = require('express');
 let app = express();
 
+var whitelist = ["http://localhost:3000", "http://192.168.1.38:3000", undefined];
 const corsOptions = {
-    origin : process.env.CLIENT_URL,
+    origin: function (origin, callback) {
+      if (whitelist.indexOf(origin) !== -1) {
+        callback(null, true)
+      } else {
+        callback(new Error('Not allowed by CORS'))
+      }
+    },
     'credentials': true,
     'allowedHeaders': ['sessionId', 'Content-Type'],
     'exposedHeaders': ['sessionId'],
@@ -47,6 +55,7 @@ app.get('/jwtid', requireAuth, (req, res) => {
 app.use('/api/gigs', gigsRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/article', articleRoutes);
+app.use('/api/edito', editoRoutes)
 
 // app.use('/api/admin', adminRoutes);
 
