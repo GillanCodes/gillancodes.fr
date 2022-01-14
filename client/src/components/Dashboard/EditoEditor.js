@@ -16,6 +16,7 @@ export default function Editor({ edito }) {
     const [text, setText] = useState(edito ? edito.body : "");
     const [isPublish, setIsPublish] = useState(edito ? edito.isPublish : false);
 
+    //eslint-disable-next-line
     const [link, setLink] = useState("");
     const [isPost, setIsPost] = useState(false);
 

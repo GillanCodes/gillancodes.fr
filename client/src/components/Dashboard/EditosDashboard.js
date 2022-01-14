@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { EditoHistory } from '../../actions/admin.action';
+import Loading from '../module/Loading';
 import { isEmpty } from '../Utils';
 
 export default function EditoDashboard() {
@@ -21,7 +22,7 @@ export default function EditoDashboard() {
             setIsLoading(false);
         }
 
-    }, [editosData, isLoading])
+    }, [editosData, isLoading, dispatch, isDispatched])
 
     return (
         <div className="container userlist-container" key="test">
@@ -59,7 +60,7 @@ export default function EditoDashboard() {
         
 
             ): (
-                <h1>Loading</h1>
+                <Loading />
             )}
 
         </div>

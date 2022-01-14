@@ -5,6 +5,7 @@ import ArticleDashboard from './Dashboard/ArticleDashboard';
 import ArticlesList from './Dashboard/ArticlesList';
 import EditosDashboard from './Dashboard/EditosDashboard';
 import UsersList from './Dashboard/UsersList';
+import Loading from './module/Loading';
 import UserInfo from './Profil/UserInfo';
 import { isEmpty } from './Utils';
 
@@ -28,7 +29,7 @@ export default function Dashboard() {
         <>
 
             {isLoading ? (
-                <h1>Loading</h1>
+                <Loading />
             ): (
 
                 <>
@@ -47,6 +48,7 @@ export default function Dashboard() {
                                     {userData.permissions.AUTHOR === true && <li className={active === "posts" ? "is-active": ""}><a onClick={(e) => setActive('posts')}>Posts</a></li>}
                                     {/* eslint-disable-next-line */}
                                     {userData.permissions.MOD === true && userData.permissions.ADMIN === true && <li className={active === "users" ? "is-active": ""}><a onClick={(e) => setActive('users')}>Users</a></li>}
+                                    {/* eslint-disable-next-line */}
                                     {userData.permissions.DEV === true && userData.permissions.ADMIN === true && <li className={active === "editos" ? "is-active": ""}><a onClick={(e) => setActive('editos')}>Editos</a></li>}
                                 </ul>
                             </div>

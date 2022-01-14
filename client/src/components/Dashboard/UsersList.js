@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
+import Loading from '../module/Loading';
 import UserInfo from '../Profil/UserInfo';
 import { isEmpty } from '../Utils'
 
@@ -51,7 +52,7 @@ export default function UsersList() {
 
                 // </div>
             ): (
-                <h1>Loading</h1>
+                <Loading />
             )}
 
         </div>

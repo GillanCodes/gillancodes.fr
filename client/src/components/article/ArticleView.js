@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
 import { getArticles } from '../../actions/article.action';
+import Loading from '../module/Loading';
 import UserInfo from '../Profil/UserInfo';
 import { isEmpty, timestampParser } from '../Utils';
 import Comment from './Comment';
@@ -127,7 +128,7 @@ export default function ArticleView(props) {
 								)}
 
 								{isLoading && (
-									<h1>Load !</h1>
+									<Loading />
 								)}
 				</div>
 		)

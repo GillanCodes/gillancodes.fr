@@ -27,8 +27,10 @@ export default function ProfileBody({user}) {
                         <div className="articleContainer profil-article">
                         {articleData.map((article) => {
                             if (article.author === user.username) {
-                                return <ArticleView article={article} cutter="500" />
+                                return <ArticleView article={article} cutter="500" key={article._id}/>
                             }
+
+                            return null
                         })}
                     </div>
                     )}
@@ -57,6 +59,8 @@ export default function ProfileBody({user}) {
                                         </div>
                                     )
                                 }
+
+                                return null
                             })}
                         </>
                     })}

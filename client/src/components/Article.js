@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router'
 import ArticleView from './article/ArticleView';
+import Loading from './module/Loading';
 import { isEmpty } from './Utils';
 
 export default function Article() {
@@ -30,7 +31,7 @@ export default function Article() {
                     })}
                 </>
             ) : (
-                <h1>Loading</h1>
+                <Loading />
             )}
         </div>
     )

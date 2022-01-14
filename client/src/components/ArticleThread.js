@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import ArticleView from './article/ArticleView';
+import Loading from './module/Loading';
 import { isEmpty } from './Utils';
 
 export default function ArticleThread() {
@@ -36,7 +37,7 @@ export default function ArticleThread() {
 
 
             ): (
-                <h1>Loading</h1>
+                <Loading />
             )}
 
         </div>

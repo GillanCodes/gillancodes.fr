@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router'
+import Loading from '../module/Loading';
 import { isEmpty } from '../Utils';
 import UserUpdator from './UserUpdator';
 
@@ -30,7 +31,7 @@ export default function UserEditor() {
                     })}
                 </div>
             ) : (
-                <h1>Loading</h1>
+                <Loading />
             )}
         </div>
     )

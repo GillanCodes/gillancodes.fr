@@ -5,6 +5,7 @@ import UserInfo from './UserInfo';
 import { isEmpty } from './../Utils';
 import UplaodUserPic from './UplaodUserPic';
 import ProfileBody from './ProfileBody';
+import Loading from '../module/Loading';
 
 export default function ProfilPage() {
 
@@ -46,7 +47,7 @@ export default function ProfilPage() {
 
         <>
             {isLoading ? (
-                <h1>Loading</h1>
+                <Loading />
             ) : (
                 <div className='profile-page'>
                     <div className="profilContainer">

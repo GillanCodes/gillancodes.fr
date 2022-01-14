@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import ArticleView from './article/ArticleView';
 import EditoView from './edito/EditoView';
+import Loading from './module/Loading';
 import OffersModule from './module/OffersModule';
 import { isEmpty } from './Utils';
 
@@ -51,7 +52,7 @@ export default function Home() {
 
 
             ): (
-                <h1>Loading</h1>
+                <Loading />
             )}
 
             <div className="thread-head" key="test2">

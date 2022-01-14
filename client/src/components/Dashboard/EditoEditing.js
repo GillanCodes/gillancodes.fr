@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { isEmpty } from '../Utils';
 import { EditoHistory } from '../../actions/admin.action';
+import Loading from '../module/Loading';
 
 export default function EditoEditing() {
 
@@ -26,7 +27,7 @@ export default function EditoEditing() {
         if (!isEmpty(editosData)) {
             setIsLoading(false);
         }
-    }, [editosData]);
+    }, [editosData, dispatch, isDispatched]);
 
     return (
         <>
@@ -42,7 +43,7 @@ export default function EditoEditing() {
                             })}
                         </>
                     ): (
-                        <h1>LOADING</h1>
+                        <Loading />
                     )}
                 
                 </>

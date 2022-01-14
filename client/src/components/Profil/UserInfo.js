@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
+import Loading from '../module/Loading';
 import { isEmpty } from './../Utils';
 
 export default function UserInfo(props) {
@@ -81,7 +82,7 @@ export default function UserInfo(props) {
              </>
            
          ) : (
-             <h1>LOADING</h1>
+             <Loading />
          )}
         
         </>

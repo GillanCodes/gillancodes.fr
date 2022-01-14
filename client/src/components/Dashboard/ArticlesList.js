@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
+import Loading from '../module/Loading';
 import { isEmpty } from '../Utils';
 
 export default function ArticlesList() {
@@ -45,7 +46,7 @@ export default function ArticlesList() {
         
 
             ): (
-                <h1>Loading</h1>
+                <Loading />
             )}
 
         </div>

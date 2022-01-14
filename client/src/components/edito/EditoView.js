@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import Loading from '../module/Loading';
 import UserInfo from '../Profil/UserInfo';
 import { isEmpty, timestampParser } from '../Utils';
 
 export default function ArticleView(props) {
 		
 	const [isLoading, setIsLoading] = useState(true);
-	const [isOpen, setIsOpen] = useState(false);
 	// eslint-disable-next-line
 	const [isAuthor, setisAuthor] = useState(false); 
 
 	// eslint-disable-next-line
 	const userData = useSelector(state => state.userReducer);
-	const dispatch = useDispatch();
 
-		const cut = props.cutter ? props.cutter : "full";
 
 		const sanitize = (input) => {
 				const doc = new DOMParser().parseFromString(input, 'text/html');
@@ -68,7 +66,7 @@ export default function ArticleView(props) {
 								)}
 
 								{isLoading && (
-									<h1>Load !</h1>
+									<Loading />
 								)}
 				</div>
 		)
